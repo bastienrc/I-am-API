@@ -22,13 +22,27 @@ L'équipe qui reprendra le projet pour les futures amélioration est formée sou
 
 Comment va fonctionner cette application ? C'est ultra simple. Un simple formulaire de signalement avec :
 
-un champ pour choisir le type d'alerte (voirie, stationnement, travaux,etc) un champ de type textarea pour décrire l'alerte un champ date un champ horaires un champ pour l'adresse sous forme de carte intéractive avec possibilité de géolocalisation un champ photo (caméra smartphone) les champs classiques (nom, prenom, adresse, cp, ville, email, téléphone)
+  - un champ pour choisir le type d'alerte (voirie, stationnement, travaux,etc)
+  - un champ de type textarea pour décrire l'alerte
+  - un champ date
+  - un champ horaires
+  - un champ pour l'adresse sous forme de carte intéractive avec possibilité de géolocalisation
+  - un champ photo (caméra smartphone)
+  - les champs classiques :
+    - nom,
+    - prenom,
+    - adresse,
+    - cp,
+    - ville,
+    - email,
+    - téléphone
 
 BONUS : possibilité d'envoyer une vidéo de 30 secondes max
 
 **Chaque alerte sera envoyée à différentes adresses email selon le sujet d'alerte.**
 
-Pour la voirie, envoyer à voirie@simplonville.co Pour les animaux, envoyer à animaux@simplonville.co
+  - Pour la voirie, envoyer à voirie@simplonville.co
+  - Pour les animaux, envoyer à animaux@simplonville.co
 
 Etc....
 
