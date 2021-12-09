@@ -4,12 +4,12 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'cityalert',
   connector: 'mongodb',
-  url: 'mongodb://admin:mdp@127.0.0.1/cityalert',
-  host: 'localhost',
-  port: 27017,
-  user: 'admin',
-  password: 'mdp',
-  database: 'cityalert',
+  url: 'mongodb://127.0.0.1/cityalert',
+  // host: 'localhost',
+  // port: 27017,
+  // user: 'admin',
+  // password: 'mdp',
+  // database: 'cityalert',
   useNewUrlParser: true
 };
 
