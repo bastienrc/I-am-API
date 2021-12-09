@@ -41,7 +41,7 @@
     "url": ""
   },
   "author": "Sebastien Colbert <colbertsebastien@gmail.com>",
-  "license": "",
+  "license": "GPL-3.0-or-later",
   "files": [
     "README.md",
     "dist",

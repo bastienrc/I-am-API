@@ -10,7 +10,7 @@ export class User extends Entity {
   @property({
     type: 'string',
   })
-  firsname?: string;
+  firstname?: string;
 
   @property({
     type: 'string',
@@ -36,6 +36,11 @@ export class User extends Entity {
     type: 'string',
   })
   phone?: string;
+
+  @property({
+    type: 'string',
+  })
+  role?: string;
 
   @property({
     type: 'number',
