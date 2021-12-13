@@ -3,17 +3,17 @@ import {Entity, model, property} from '@loopback/repository';
 @model()
 export class Alert extends Entity {
   @property({
-    type: 'number',
-    id: true,
-    generated: true,
-  })
-  id?: number;
-
-  @property({
     type: 'string',
     required: true,
   })
   type: string;
+
+  @property({
+    type: 'string',
+    id: true,
+    generated: true,
+  })
+  id?: string;
 
   @property({
     type: 'string',
@@ -22,9 +22,30 @@ export class Alert extends Entity {
 
   @property({
     type: 'date',
+    default: 'date.now()',
+  })
+  createdAt?: string;
+
+  @property({
+    type: 'date',
     required: true,
   })
   date: string;
+
+  @property({
+    type: 'string',
+  })
+  gps?: string;
+
+  @property({
+    type: 'string',
+  })
+  adresse?: string;
+
+  @property({
+    type: 'string',
+  })
+  photo?: string;
 
 
   constructor(data?: Partial<Alert>) {
