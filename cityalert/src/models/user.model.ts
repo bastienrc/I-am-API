@@ -1,62 +1,12 @@
-import {Entity, model, property} from '@loopback/repository';
+// Copyright IBM Corp. 2019. All Rights Reserved.
+// Node module: @loopback/authentication
+// This file is licensed under the MIT License.
+// License text available at https://opensource.org/licenses/MIT
 
-@model()
-export class User extends Entity {
-  @property({
-    type: 'string',
-    id: true,
-    generated: true,
-  })
-  id?: string;
-
-  @property({
-    type: 'string',
-  })
-  lastname?: string;
-
-  @property({
-    type: 'string',
-  })
-  firstname?: string;
-
-  @property({
-    type: 'string',
-  })
-  address?: string;
-
-  @property({
-    type: 'string',
-  })
-  cp?: string;
-
-  @property({
-    type: 'string',
-  })
-  city?: string;
-
-  @property({
-    type: 'string',
-    required: true
-  })
-  mail?: string;
-
-  @property({
-    type: 'string',
-  })
-  phone?: string;
-
-  @property({
-    type: 'string',
-  })
-  role?: string;
-
-  constructor(data?: Partial<User>) {
-    super(data);
-  }
+export interface User {
+  id: string;
+  username: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
 }
-
-export interface UserRelations {
-  // describe navigational properties here
-}
-
-export type UserWithRelations = User & UserRelations;

@@ -1,4 +1,6 @@
-import {BootMixin} from '@loopback/boot';
+import { AuthenticationComponent } from '@loopback/authentication';
+import {registerAuthenticationStrategy} from '@loopback/authentication';
+import { BootMixin } from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
 import {
   RestExplorerBindings,
@@ -40,5 +42,9 @@ export class CityalertApplication extends BootMixin(
         nested: true,
       },
     };
+
+    // Mount authentication system
+    this.component(AuthenticationComponent);
+    registerAuthenticationStrategy(this, BasicAuthenticationStrategy);
   }
 }
