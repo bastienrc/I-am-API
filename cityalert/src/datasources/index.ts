@@ -1,1 +1,1 @@
-export * from './cityalert.datasource';
+export * from './mongo.datasource';
