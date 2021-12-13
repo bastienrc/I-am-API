@@ -1,0 +1,52 @@
+### Variables
+@baseUrl = http://localhost:3000/api/
+@token = {{login.response.body.token}}
+@id = {{login.response.body.userId}}
+
+@email = user001@gmail.com
+@password = Test62200
+
+### SignUp
+POST {{baseUrl}}/users/signup HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Login
+# @name login
+POST {{baseUrl}}/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+### Update
+PUT {{baseUrl}}/users/{{id}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstname": "Anakin",
+  "role": "Dark Vador",
+  "avatarUrl": "https://cdn.pixabay.com/photo/2019/01/13/10/58/character-3930118_960_720.jpg"
+}
+
+### Delete
+DELETE {{baseUrl}}/users/{{id}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Read one
+GET {{baseUrl}}/users/{{id}} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Read all
+GET {{baseUrl}}/users/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
