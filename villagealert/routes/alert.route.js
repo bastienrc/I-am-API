@@ -1,8 +1,8 @@
-const express = require('express')
-const { readAllAlerts, newAlert } = require('../controllers/alert.controller')
-const router = express.Router()
+import { Router } from 'express'
+import { readAllAlerts, newAlert } from '../controllers/alert.controller.js'
+const router = Router()
 
 router.get('/', readAllAlerts)
 router.post('/', newAlert)
 
-module.exports = router
+export default router

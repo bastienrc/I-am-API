@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+const { Schema, plugin, model } = mongoose
 
-const alertSchema = mongoose.Schema({
-//   alertId: mongoose.ObjectId,
+const alertSchema = Schema({
   firstname: {
     type: String,
     trim: true,
@@ -71,7 +71,7 @@ const alertSchema = mongoose.Schema({
   timestamps: true
 })
 
-mongoose.plugin(schema => {
+plugin(schema => {
   schema.pre('findOneAndUpdate', setRunValidators)
   schema.pre('updateMany', setRunValidators)
   schema.pre('updateOne', setRunValidators)
@@ -82,4 +82,4 @@ function setRunValidators () {
   this.setOptions({ runValidators: true })
 }
 
-module.exports = mongoose.model('Alert', alertSchema)
+export default model('Alert', alertSchema)

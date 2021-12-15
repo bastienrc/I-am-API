@@ -5,6 +5,7 @@
   "description": "API d'alert citoyenne",
   "author": "Sebastien Colbert <colbertsebastien@gmail.com> (https://sebastiencolbert.fr)",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "node app.js",
     "watch": "nodemon app.js",
