@@ -17,7 +17,7 @@ const alertSchema = Schema({
   address: {
     type: String
   },
-  cp: {
+  postCode: {
     type: String
   },
   city: {
@@ -38,8 +38,8 @@ const alertSchema = Schema({
     trim: true,
     required: true,
     minLength: [2, 'Minimum 2 caractères'],
-    maxLength: [42, 'Maximum 42 caractères']
-    // contains: [voirie, stationnement, travaux]
+    maxLength: [42, 'Maximum 42 caractères'],
+    enum: ['voirie', 'stationnement', 'travaux', 'autre']
   },
   description: {
     type: String,
@@ -61,9 +61,11 @@ const alertSchema = Schema({
     type: String
   },
   photo: {
+    default: '',
     type: String
   },
   video: {
+    default: '',
     type: String
   }
 },
