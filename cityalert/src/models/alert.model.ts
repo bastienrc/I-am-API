@@ -4,16 +4,22 @@ import {Entity, model, property} from '@loopback/repository';
 export class Alert extends Entity {
   @property({
     type: 'string',
-    required: true,
-  })
-  type: string;
-
-  @property({
-    type: 'string',
     id: true,
     generated: true,
   })
   id?: string;
+
+  @property({
+    type: 'string',,
+    required: true,
+  })
+  userId?: string;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+  type: string;
 
   @property({
     type: 'string',
