@@ -10,3 +10,8 @@ Développement et déploiement d'une API métier.
 
 - [Brief de la mission](/doc/Brief.md)
 - [Modelisation UML de l'api](/doc/modelisation.md)
+
+L'application existe en plusieurs versions :
+  - **CityAlert** : créer avec le framework *LoopBack 4*
+  - **TownAlert** : réaliser avec le framework *NestJS*
+  - **VillageAlert** : coder avec *Express*
