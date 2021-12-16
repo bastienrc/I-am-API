@@ -6,9 +6,16 @@ POST {{baseUrl}}/api/alerts/ HTTP/1.1
 Content-Type: application/json
 
 {
-  "typeAlert": "Chien",
-  "email": "totott@test.fr",
-  "description": "Le chien du voisin à chier devant ma porte !"
+  "typeAlert": "voirie",
+  "firstname": "Pat",
+  "lastname": "Hibulaire",
+  "address": "42 rue nullepart ailleurs",
+  "email": "totot@ietest.fr",
+  "description": "Mon voisin est un con !",
+  "addressAlert": "Mars",
+  "phone": "0123456789",
+  "city": "Calais",
+  "postCode": "62200"
 }
 
 
