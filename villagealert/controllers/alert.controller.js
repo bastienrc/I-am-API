@@ -15,34 +15,35 @@ export function readAllAlerts (req, res, next) {
 
 function mailAlert (info) {
   const {
-    lastName,
-    firstName,
-    userAdress,
+    firstname,
+    lastname,
+    address,
     postCode,
     city,
-    email,
     phone,
+    email,
     description,
-    date,
-    image,
-    video
+    dateBegin,
+    dateEnd,
+    addressAlert,
+    photo
   } = info
 
   return `
-    <h2>Nouvelle Alerte !!!</h2>
-    <p>${firstName} ${lastName}</p>
+    <h2>Alerte Citoyenne</h2>
+    <p>
+      ${firstname} ${lastname}<br/>
+      ${address}<br/>
+      ${postCode} ${city}<br/>
+      ${email}<br/>
+      ${phone}
+    </p>
 
-    <p>${userAdress}</p>
-    <p>${postCode} ${city}</p>
-    <p>${email}</p>
-    <p>${phone}</p>
+    <p>Nous envoie l'alerte suivante :</p>
+    <p>${description}</p>
+    <p>Du ${dateBegin.toLocaleString()} au ${dateEnd.toLocaleString()} à l'adresse ${addressAlert}.</p>
 
-    <h3>En date du ${date}, nous envoie l'alerte suivante :</h3>
-    <p>Description: ${description}</p>
-
-    <h3>Image et video :</h3>
-    <image src="${image}" />
-    <video src="${video}" />
+    <image src="${photo}" alt="Photo de l'alerte citoyenne" height="300"/>
   `
 }
 
@@ -52,23 +53,24 @@ export function newAlert (req, res, next) {
   })
   alert.save()
     .then(() => {
-      let emailService
-      switch (typeAlert) {
+      let emailService = ''
+      switch (alert.typeAlert) {
         case 'voirie':
-          emailService = 'voirie@simplonville.co'
+          emailService = 'voirie@villagealert.fr'
           break
         case 'stationnement':
-          emailService = 'stationnement@simplonville.co'
+          emailService = 'stationnement@villagealert.fr'
           break
         case 'travaux':
-          emailService = 'travaux@simplonville.co'
+          emailService = 'travaux@villagealert.fr'
           break
         default:
-          emailService = 'autres@simplonville.co'
+          emailService = 'autres@villagealert.fr'
           break
       }
-      sendMail(emailService, 'Nouvelle alerte.', mailAlert())
-      res.status(201).json({ message: 'Objet enregistré !' })
+      const from = `"${alert.firstname} ${alert.lastname}" <${alert.email}>`
+      sendMail(from, emailService, 'Nouvelle alerte!', mailAlert(alert)).catch(console.error)
+      res.status(201).json({ message: 'Votre alerte a bien été enregistrée!' })
     })
-    .catch(error => res.status(400).json({ error }))
+    .catch(error => res.status(400).json({ error: error }))
 }

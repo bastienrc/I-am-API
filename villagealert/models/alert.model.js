@@ -64,10 +64,12 @@ const alertSchema = Schema({
     maxLength: [500, 'Maximum 500 caractères']
   },
   dateBegin: {
-    type: Date
+    type: Date,
+    default: Date.now()
   },
   dateEnd: {
-    type: String
+    type: Date,
+    default: Date.now()
   },
   addressAlert: {
     type: String,

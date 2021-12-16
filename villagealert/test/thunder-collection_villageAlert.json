@@ -1,0 +1,135 @@
+{
+  "client": "Thunder Client",
+  "collectionName": "villageAlert",
+  "dateExported": "2021-12-16T17:56:03.845Z",
+  "version": "1.1",
+  "folders": [],
+  "requests": [
+    {
+      "containerId": "",
+      "sortNum": 10000,
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        {
+          "name": "Accept",
+          "value": "*/*"
+        }
+      ],
+      "colId": "f4cc56d2-2180-45bd-b399-a976f2a27d63",
+      "name": "http://localhost:8000/api/alerts/",
+      "url": "http://localhost:8000/api/alerts/",
+      "method": "GET",
+      "modified": "2021-12-16T15:19:21.077Z",
+      "created": "2021-12-16T13:02:35.112Z",
+      "_id": "379b73ab-7269-4859-b456-677eca1a2171",
+      "params": [],
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 20000,
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "f4cc56d2-2180-45bd-b399-a976f2a27d63",
+      "name": "http://localhost:8000/api/alerts/",
+      "url": "http://localhost:8000/api/alerts/",
+      "method": "POST",
+      "modified": "2021-12-16T14:52:51.161Z",
+      "created": "2021-12-16T13:04:29.811Z",
+      "_id": "08776a42-7641-45e7-9a04-7bde440e6fd8",
+      "params": [],
+      "body": {
+        "type": "json",
+        "raw": "{\n  \"typeAlert\": \"voirie\",\n  \"firstname\": \"Pat\",\n  \"lastname\": \"Hibulaire\",\n  \"address\": \"42 rue nullepart ailleurs\",\n  \"email\": \"totot@ietest.fr\",\n  \"description\": \"Mon voisin est un con !\",\n  \"addressAlert\": \"Mars\",\n  \"phone\": \"0123456789\",\n  \"city\": \"Calais\",\n  \"postCode\": \"62200\"\n}",
+        "form": []
+      },
+      "tests": []
+    },
+    {
+      "containerId": "",
+      "sortNum": 30000,
+      "headers": [
+        {
+          "name": "Accept",
+          "value": "*/*"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Thunder Client (https://www.thunderclient.io)"
+        }
+      ],
+      "colId": "f4cc56d2-2180-45bd-b399-a976f2a27d63",
+      "name": "http://localhost:8000/api/alerts/ avec image",
+      "url": "http://localhost:8000/api/alerts/",
+      "method": "POST",
+      "modified": "2021-12-16T15:10:47.653Z",
+      "created": "2021-12-16T14:53:04.230Z",
+      "_id": "7737e082-6f56-4960-85ee-2185c9bf48a8",
+      "params": [],
+      "body": {
+        "type": "formdata",
+        "raw": "",
+        "form": [
+          {
+            "name": "lastname",
+            "value": "hugo"
+          },
+          {
+            "name": "firstname",
+            "value": "victor"
+          },
+          {
+            "name": "addressAlert",
+            "value": "Notre dame"
+          },
+          {
+            "name": "description",
+            "value": "Un type bizarre sonne la cloche tous les matins"
+          },
+          {
+            "name": "typeAlert",
+            "value": "voirie"
+          },
+          {
+            "name": "email",
+            "value": "victor.hugo@gmail.com"
+          },
+          {
+            "name": "phone",
+            "value": "0123456789"
+          },
+          {
+            "name": "city",
+            "value": "Paris"
+          },
+          {
+            "name": "postCode",
+            "value": "62200"
+          },
+          {
+            "name": "address",
+            "value": "Chez Esmeralda"
+          }
+        ],
+        "files": [
+          {
+            "name": "photo",
+            "value": "/data/Images/be57ff4521c2c037d387a88a7b4afb4f.jpg"
+          }
+        ]
+      },
+      "tests": []
+    }
+  ]
+}
