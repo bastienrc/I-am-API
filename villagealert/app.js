@@ -1,5 +1,4 @@
 import dotenv from 'dotenv' // https://www.npmjs.com/package/dotenv
-import createError from 'http-errors' // https://www.npmjs.com/package/http-errors
 import express from 'express' // https://www.npmjs.com/package/express
 import logger from 'morgan' // https://www.npmjs.com/package/morgan
 import mongoose from 'mongoose' // https://www.npmjs.com/package/mongoose
@@ -14,12 +13,11 @@ dotenv.config()
 const app = express()
 app.use(logger('dev'))
 
+// Listen ...
+app.listen(process.env.PORT || 3000)
+
 // Connection à la base de données Mongo
-mongoose.connect(`${process.env.DATABASE_URL}?retryWrites=true&w=majority`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
+mongoose.connect(`${process.env.DATABASE_URL}?retryWrites=true&w=majority`)
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'))
 
@@ -32,25 +30,8 @@ app.use((req, res, next) => {
 })
 
 // Tout en JSON
-app.use(express.json())
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ extended: true }))
 
 // Use Routes
 app.use('/api/alerts', alertRoutes)
-
-app.listen(process.env.PORT || 3000)
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404))
-})
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
-
-  // render the error page
-  res.status(err.status || 500)
-  res.render('error')
-})
