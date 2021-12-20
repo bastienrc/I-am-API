@@ -1,24 +1,73 @@
-### Variables
-@baseUrl = http://localhost:8000
+###
+### VARIABLES
+###
 
-### Envoie d'une alerte
-POST {{baseUrl}}/api/alerts/ HTTP/1.1
-Content-Type: application/json
+@baseUrl = http://localhost:8000
+@token = {{login.response.body.token}}
+@email = test001@gmail.fr
+@password = Test62200
+@alertId = 61bf9de4c7781225b76fdc94
+
+
+###
+### USERS
+###
+
+### Signup
+POST {{baseUrl}}/api/users/signup HTTP/1.1
+content-type: application/json
 
 {
-  "typeAlert": "voirie",
+  "email": "{{email}}",
+  "password": "{{password}}",
   "firstname": "Pat",
   "lastname": "Hibulaire",
   "address": "42 rue nullepart ailleurs",
-  "email": "totot@ietest.fr",
-  "description": "Mon voisin est un con !",
-  "addressAlert": "Mars",
   "phone": "0123456789",
   "city": "Calais",
   "postCode": "62200"
 }
 
+### Login
+# @name login
+POST {{baseUrl}}/api/users/login HTTP/1.1
+content-type: application/json
 
-### Read all
-GET {{baseUrl}}/api/alerts/ HTTP/1.1
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+
+###
+### Alert
+### Authorization: Bearer {{token}}
+
+### Create: Envoie d'une alerte
+POST {{baseUrl}}/api/alerts?token={{token}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "type": "voirie",
+  "description": "Mon voisin est un con 2 !",
+  "address": "Mars"
+}
+
+### Read All: Liste toute les chambres
+GET {{baseUrl}}/api/rooms
+
+### Read: Affiche une chambre
+GET {{baseUrl}}/api/rooms/{{alertId}}
+
+### Update: Modifie une chambre
+PATCH {{baseUrl}}/private/api/rooms/{{alertId}}?token={{token}} HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Suite dans les idées",
+  "maxPersons": 69
+}
+
+### Delete: Efface une chambre
+DELETE {{baseUrl}}/private/api/rooms/{{alertId}}?token={{token}} HTTP/1.1
 Content-Type: application/json

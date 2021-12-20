@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mongodb:
+    container_name: villagealert-mongodb
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - villagealert-mongodb:/data/db
+    command: mongod
+    networks:
+      - villagealert
+
+volumes:
+  villagealert-mongodb: {}
+
+networks:
+  villagealert:
