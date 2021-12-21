@@ -4,9 +4,9 @@
 
 @baseUrl = http://localhost:8000
 @token = {{login.response.body.token}}
-@email = test001@gmail.fr
+@email = test05@gmail.fr
 @password = Test62200
-@alertId = 61bf9de4c7781225b76fdc94
+@alertId = 61c0f70649023f0fbf8b45b5
 
 
 ###
@@ -43,7 +43,7 @@ content-type: application/json
 ### Alert
 ### Authorization: Bearer {{token}}
 
-### Create: Envoie d'une alerte
+### Create: Envoie d'une alerte?token={{token}}
 POST {{baseUrl}}/api/alerts?token={{token}} HTTP/1.1
 Content-Type: application/json
 
@@ -53,21 +53,21 @@ Content-Type: application/json
   "address": "Mars"
 }
 
-### Read All: Liste toute les chambres
-GET {{baseUrl}}/api/rooms
+### Read All: Liste toute les alertes
+GET {{baseUrl}}/api/alerts?token={{token}}
 
-### Read: Affiche une chambre
-GET {{baseUrl}}/api/rooms/{{alertId}}
+### Read: Affiche une alerte
+GET {{baseUrl}}/api/alerts/{{alertId}}?token={{token}}
 
-### Update: Modifie une chambre
-PATCH {{baseUrl}}/private/api/rooms/{{alertId}}?token={{token}} HTTP/1.1
-content-type: application/json
+### Update: Modifie une alerte
+# PATCH {{baseUrl}}/api/alerts/{{alertId}} HTTP/1.1
+# content-type: application/json
 
-{
-  "name": "Suite dans les idées",
-  "maxPersons": 69
-}
+# {
+#   "name": "Suite dans les idées",
+#   "maxPersons": 69
+# }
 
 ### Delete: Efface une chambre
-DELETE {{baseUrl}}/private/api/rooms/{{alertId}}?token={{token}} HTTP/1.1
-Content-Type: application/json
+# DELETE {{baseUrl}}/api/alerts/{{alertId}} HTTP/1.1
+# Content-Type: application/json

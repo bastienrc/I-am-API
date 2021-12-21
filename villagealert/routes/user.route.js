@@ -13,7 +13,7 @@ const router = express.Router()
 
 // Account
 router.get(
-  '/api/users/account',
+  '/account',
   passport.authenticate('signup', { session: false }),
   catchErrors(getAccount)
 )
