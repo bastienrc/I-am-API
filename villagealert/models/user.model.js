@@ -14,6 +14,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  role: {
+    type: String,
+    enum: ['Citoyen', 'Responsable Service', 'Admin'],
+    default: 'Citoyen'
+  },
   firstname: {
     type: String,
     trim: true,
@@ -66,9 +71,9 @@ UserSchema.pre('save', async function (next) {
 })
 
 // Ajouter une méthode pour vérifier le password
-UserSchema.methods.isValidPassword = async function (password) {
+UserSchema.methods.isValidPassword = function (password) {
   const user = this
-  const isSame = await bcrypt.compare(password, user.password)
+  const isSame = bcrypt.compare(password, user.password)
   return isSame
 }
 

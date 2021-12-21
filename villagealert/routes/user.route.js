@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
 import { catchErrors } from '../utils/helpers.js'
-import { getAccount, signupController } from '../controllers/user.controller.js'
+import { getAccount, signupController, deleteUser, updateUser } from '../controllers/user.controller.js'
 
 dotenv.config()
 
@@ -41,13 +41,27 @@ router.post(
 
           const body = { _id: user._id, email: user.email }
           const token = jwt.sign({ user: body }, process.env.SECRET_KEY)
-          res.json({ token })
+          res.json({ id: user._id, token })
         })
       } catch (error) {
         return next(error)
       }
     })(req, res, next)
   }
+)
+
+// Update
+router.patch(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  catchErrors(updateUser)
+)
+
+// Delete
+router.delete(
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
+  catchErrors(deleteUser)
 )
 
 export default router

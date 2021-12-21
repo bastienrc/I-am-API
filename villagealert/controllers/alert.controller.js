@@ -68,9 +68,16 @@ export function newAlert (req, res, next) {
           emailService = 'autres@villagealert.fr'
           break
       }
-      const from = `"${alert.firstname} ${alert.lastname}" <${alert.email}>`
+      // const from = `"${alert.firstname} ${alert.lastname}" <${alert.email}>`
+      const from = 'city@village.fr'
       sendMail(from, emailService, 'Nouvelle alerte!', mailAlert(alert)).catch(console.error)
       res.status(201).json({ message: 'Votre alerte a bien été enregistrée!' })
     })
     .catch(error => res.status(400).json({ error: error }))
+}
+
+export function deleteAlert (req, res, next) {
+  Alert.findByIdAndDelete(req.params.id)
+    .then(() => res.status(200).json({ message: 'Alerte supprimée !' }))
+    .catch(error => res.status(400).json({ error }))
 }
