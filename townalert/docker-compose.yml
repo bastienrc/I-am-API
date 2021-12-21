@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  mongodb:
+    container_name: townalert-mongodb
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - townalert-mongodb:/data/db
+    command: mongod
+    networks:
+      - townalert
+
+volumes:
+  townalert-mongodb: {}
+
+networks:
+  townalert:
