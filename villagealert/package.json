@@ -17,6 +17,9 @@
     "nodemon": "^2.0.15",
     "standard": "^16.0.4"
   },
+  "standard": {
+    "env": ["jest"]
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.27.1",
