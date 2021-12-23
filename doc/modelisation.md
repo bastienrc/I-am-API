@@ -1,8 +1,16 @@
 # I'am API, modélisation
 
-## User Story : Utilisateur
+## User Story : Citoyen
 
-Hal veut signaler un probleme qu'il voit depuis sa fenetre depuis son pc
+1. Il peut créer un compte
+2. Il peut se connecter
+3. Il peut voir son compte
+4. Il peut le supprimer
+5. Il peut envoyer une alert
+   1. ...avec une image
+   2. ...avec une video
+6. Il peut voir la liste de ses alertes
+7. Il peut supprimer ses alertes
 
 Alert :
   - alersId
@@ -25,26 +33,29 @@ User :
   - email,
   - téléphone
 
-
 ### Diagramme de séquence
 
 ```plantuml
-@startuml sequenceDiagramUtilisateur
-    actor Utilisateur
-    Utilisateur -> "login()" : email & password
-    "login()" -> Utilisateur : session token
+@startuml sequenceDiagramCitoyen
+    actor Citoyen
+    actor Responsable
+    Citoyen -> "login()" : email & password
+    "login()" -> Citoyen : token & userId
     activate "login()"
-    Utilisateur -> "placeOrder()" : session token, order info
-    "placeOrder()" -> Utilisateur : ok
-    Utilisateur -> "logout()"
-    "logout()" -> Utilisateur : ok
+    Citoyen -> "/account" : token, info
+    Citoyen -> "/alert" : Envoie une plainte
+    "alert" -> Responsable
+    Citoyen -> "logout()"
+    "logout()" -> Citoyen : ok
     deactivate "login()"
 @enduml
 ```
 
 ## User Story : Responsable
 
-Le responsable se connecte à l'application et peut voir la liste de tous les alertes adrésser à son service. Il a la possibilité de renseigner son mail pour recevoir les alertes directement.
+1. Il peut faire la meme chose que le citoyen
+2. Il peut voir la liste des alertes selon son service
+3. Il peut mettre à jour le status des alerts
 
 ### Diagramme de séquence
 
@@ -61,3 +72,9 @@ Le responsable se connecte à l'application et peut voir la liste de tous les al
     deactivate "login()"
 @enduml
 ```
+
+## User Story : Admin
+
+1. Il peut faire la meme chose que le responsable
+2. Il peut donner un role au responsable
+3. Il peut attribuer le service au responsable
