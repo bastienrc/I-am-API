@@ -1,6 +1,6 @@
 import UserModel from '../models/user.model.js'
 
-export async function signupController (req, res, next) {
+export async function signup (req, res, next) {
   res.json({
     message: 'Signup OK',
     user: req.user
@@ -14,7 +14,7 @@ export const getAccount = async (req, res) => {
 
 export const updateUser = (req, res, next) => {
   UserModel.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-    .then(user => res.status(200).json({ message: 'Utilisateur modifié !' }))
+    .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
     .catch(error => res.status(404).json({ error }))
 }
 
