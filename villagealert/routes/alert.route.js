@@ -9,13 +9,27 @@ dotenv.config()
 
 const router = express.Router()
 
-// Read All
-router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  readAllAlerts
-)
+//
+// Citoyen
+//
 
+// Create
+router.post('/', passport.authenticate('jwt', { session: false }), uploadImage, newAlert)
+
+// Read: Il peut voir son alerte
+router.get('/:id', passport.authenticate('jwt', { session: false }), readOneAlert)
+
+// Read: Il peut voir toutes ses alertes
+router.get('/:id', passport.authenticate('jwt', { session: false }), readOneAlert)
+
+// Delete: Il peut supprimer son alerte
+router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteAlert)
+
+//
+// Responsable
+//
+
+// Il peut voir la liste des alertes selon son service
 // Read
 router.get(
   '/:id',
@@ -23,18 +37,18 @@ router.get(
   readOneAlert
 )
 
-// Create
-router.post(
+
+// Il peut mettre à jour le status des alerts
+
+//
+// Admin
+//
+
+// Read All
+router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
-  uploadImage,
-  newAlert
-)
-
-router.delete(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  deleteAlert
+  readAllAlerts
 )
 
 export default router
