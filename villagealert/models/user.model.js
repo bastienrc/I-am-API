@@ -16,8 +16,13 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['Citoyen', 'Responsable Service', 'Admin'],
-    default: 'Citoyen'
+    enum: ['citoyen', 'responsable', 'admin'],
+    default: 'citoyen'
+  },
+  service: {
+    type: String,
+    trim: true,
+    enum: ['voirie', 'stationnement', 'travaux', 'autre']
   },
   firstname: {
     type: String,
