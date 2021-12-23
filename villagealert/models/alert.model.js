@@ -8,9 +8,13 @@ const alertSchema = Schema({
   },
   type: {
     type: String,
-    trim: true,
     required: true,
     enum: ['voirie', 'stationnement', 'travaux', 'autre']
+  },
+  status: {
+    type: String,
+    enum: ['todo', 'inProgress', 'done'],
+    default: 'todo'
   },
   description: {
     type: String,
