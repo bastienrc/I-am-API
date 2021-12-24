@@ -2,6 +2,12 @@ import dotenv from 'dotenv' // https://www.npmjs.com/package/dotenv
 import express from 'express' // https://www.npmjs.com/package/express
 import logger from 'morgan' // https://www.npmjs.com/package/morgan
 import mongoose from 'mongoose' // https://www.npmjs.com/package/mongoose
+
+// Swagger
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpecs from './swaggerConfig.js'
+
+// Authentification passport.js
 import './utils/auth.js'
 
 // Routes
@@ -30,6 +36,9 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
   next()
 })
+
+// Génération de la doc avec Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs))
 
 // Tout en JSON
 app.use(express.json({ limit: '50mb' }))

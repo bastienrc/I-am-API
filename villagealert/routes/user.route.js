@@ -15,7 +15,29 @@ const router = express.Router()
 // Citoyen
 //
 
-// Création d'un compte
+/**
+ * @openapi
+ * /api/users/signup:
+ *   post:
+ *     description: Création d'un compte
+ *     tags: [Users]
+ *     parameters:
+ *       - name: email
+ *         description: email
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: password
+ *         description: password
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Renvoie un token et l'id de l'utilisateur
+ *       400:
+ *         description: Bad Request, vous n'auriez pas oublié quelque chose ?
+ */
 router.post('/signup', passport.authenticate('signup', { session: false }), catchErrors(signup))
 
 // Connexion a son compte
@@ -42,7 +64,7 @@ router.post('/login', (req, res, next) => {
 )
 
 // Voir son profil
-router.get('/account', passport.authenticate('signup', { session: false }), catchErrors(getAccount))
+router.get('/account', passport.authenticate('jwt', { session: false }), catchErrors(getAccount))
 
 // Mettre à jour son profil
 router.patch('/account', passport.authenticate('jwt', { session: false }), catchErrors(updateAccount))
