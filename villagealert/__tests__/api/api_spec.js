@@ -1,13 +1,14 @@
 const frisby = require('frisby')
 const baseUrl = 'http://localhost:8000'
-const emailTest = 'testAPI002@gmail.com'
+const timestamp = Date.now()
+const emailTest = `testAPI${timestamp}@gmail.com`
 const passwordTest = 'mdp123'
 
 //
 // USERS
 //
 
-// content-type: application/json
+// Test de création de compte
 it('Should signup', function () {
   return frisby.post(baseUrl + '/api/users/signup', {
     email: emailTest,
@@ -18,6 +19,15 @@ it('Should signup', function () {
     phone: '0123456789',
     city: 'Calais',
     postCode: '62200'
+  })
+    .expect('status', 200)
+})
+
+// Test de connexion
+it('Should be login', function () {
+  return frisby.post(baseUrl + '/api/users/login', {
+    email: emailTest,
+    password: passwordTest
   })
     .expect('status', 200)
 })
