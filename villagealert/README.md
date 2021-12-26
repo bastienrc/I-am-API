@@ -7,6 +7,9 @@ Version de l'api avec Express.
   - Envoie d'alerte
   - Gestion des photos
   - Envoie de mails
+  - Gestion users avec ACL
+  - Authentication avec passport: 
+    - passport-local: http://www.passportjs.org/packages/passport-local
 
 ## Installation & Démarage
 
