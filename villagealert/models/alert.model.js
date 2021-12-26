@@ -6,8 +6,9 @@ const alertSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  type: {
+  typeAlert: {
     type: String,
+    trim: true,
     required: true,
     enum: ['voirie', 'stationnement', 'travaux', 'autre']
   },
@@ -31,7 +32,7 @@ const alertSchema = Schema({
     type: Date,
     default: Date.now()
   },
-  address: {
+  addressAlert: {
     type: String,
     trim: true,
     required: true,
