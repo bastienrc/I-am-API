@@ -115,13 +115,79 @@ router.post('/login', (req, res, next) => {
 }
 )
 
-// Voir son profil
+/**
+ * @openapi
+ * /api/users/account:
+ *   get:
+ *     description: voir son compte
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
 router.get('/account', passport.authenticate('jwt', { session: false }), catchErrors(getAccount))
 
-// Mettre à jour son profil
+/**
+ * @openapi
+ * /api/users/account:
+ *   get:
+ *     description: Mettre à jour son profil
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
 router.patch('/account', passport.authenticate('jwt', { session: false }), catchErrors(updateAccount))
 
-// Effacer son compte
+/**
+ * @openapi
+ * /api/users/account:
+ *   get:
+ *     description: Effacer son compte
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
 router.delete('/account', passport.authenticate('jwt', { session: false }), catchErrors(deleteAccount))
 
 //
