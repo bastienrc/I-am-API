@@ -194,16 +194,104 @@ router.delete('/account', passport.authenticate('jwt', { session: false }), catc
 // Admin
 //
 
-// Update: mise à jour du role et service de l'utilisateur
+/**
+ * @openapi
+ * /api/users/:id:
+ *   patch:
+ *     description: mise à jour du role et service de l'utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
 router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErrors(updateUser))
 
-// Read All: Liste tous les utilisateurs
-router.get('/', passport.authenticate('jwt', { session: false }), catchErrors(getAllUser))
+/**
+ * @openapi
+ * /api/users/list:
+ *   get:
+ *     description: liste tous les utilisateurs
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
+router.get('/list', passport.authenticate('jwt', { session: false }), catchErrors(getAllUser))
 
-// Read One: Affiche la fiche utilisateur
+/**
+ * @openapi
+ * /api/users/:id:
+ *   get:
+ *     description: Affiche la fiche utilisateur
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
 router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors(getOneUser))
 
-// Effacer son compte
+/**
+ * @openapi
+ * /api/users/:id:
+ *   delete:
+ *     description: L'admin peut effacer un compte
+ *     tags: [Users]
+ *     parameters:
+ *       - name: token
+ *         description: token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: id
+ *         description: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: ...
+ *       400:
+ *         description: ...
+ */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), catchErrors(deleteUser))
 
 export default router
