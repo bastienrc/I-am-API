@@ -32,15 +32,67 @@ const router = express.Router()
  *         schema:
  *           type: string
  *         required: true
+ *       - name: firstname
+ *         description: firstname
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: lastname
+ *         description: lastname
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: address
+ *         description: address
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: phone
+ *         description: phone
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: city
+ *         description: city
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: postCode
+ *         description: postCode
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Signup OK
+ *       400:
+ *         description: ERROR
+ */
+router.post('/signup', passport.authenticate('signup', { session: false }), catchErrors(signup))
+
+/**
+ * @openapi
+ * /api/users/login:
+ *   post:
+ *     description: Connexion a son compte
+ *     tags: [Users]
+ *     parameters:
+ *       - name: email
+ *         description: email
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: password
+ *         description: password
+ *         schema:
+ *           type: string
+ *         required: true
  *     responses:
  *       200:
  *         description: Renvoie un token et l'id de l'utilisateur
  *       400:
  *         description: Bad Request, vous n'auriez pas oublié quelque chose ?
  */
-router.post('/signup', passport.authenticate('signup', { session: false }), catchErrors(signup))
-
-// Connexion a son compte
 router.post('/login', (req, res, next) => {
   passport.authenticate('login', async (err, user) => {
     try {
