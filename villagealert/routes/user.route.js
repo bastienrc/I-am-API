@@ -143,7 +143,7 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
 /**
  * @openapi
  * /api/users/account:
- *   get:
+ *   patch:
  *     description: Mettre à jour son profil
  *     tags: [Users]
  *     parameters:
@@ -168,7 +168,7 @@ router.patch('/account', passport.authenticate('jwt', { session: false }), catch
 /**
  * @openapi
  * /api/users/account:
- *   get:
+ *   delete:
  *     description: Effacer son compte
  *     tags: [Users]
  *     parameters:
