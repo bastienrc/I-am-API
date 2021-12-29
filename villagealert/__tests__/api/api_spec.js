@@ -3,13 +3,20 @@ const baseUrl = 'http://localhost:8000'
 const timestamp = Date.now()
 const emailTest = `testAPI${timestamp}@gmail.com`
 const passwordTest = 'mdp123'
+const auth = {
+  request: {
+    headers: {
+      Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+    }
+  }
+}
 
 //
 // USERS
 //
 
 // Test de création de compte
-it('Should signup', function () {
+it('Should be signup', function () {
   return frisby.post(baseUrl + '/api/users/signup', {
     email: emailTest,
     password: passwordTest,
@@ -29,5 +36,32 @@ it('Should be login', function () {
     email: emailTest,
     password: passwordTest
   })
+    .expect('status', 200)
+})
+
+// Test get account
+it('Should have this info user', function () {
+  return frisby
+    .setup(auth)
+    .get(baseUrl + '/api/users/account')
+    .expect('status', 200)
+})
+
+// Test patch account
+it('Should update user account', function () {
+  return frisby
+    .setup(auth)
+    .patch(baseUrl + '/api/users/account', {
+      firstname: 'Luke',
+      lastname: 'Skywalker'
+    })
+    .expect('status', 200)
+})
+
+// Test delete account
+it('Should delete user account', function () {
+  return frisby
+    .setup(auth)
+    .delete(baseUrl + '/api/users/account')
     .expect('status', 200)
 })
