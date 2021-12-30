@@ -120,7 +120,7 @@ router.post('/login', (req, res, next) => {
  * /api/users/account:
  *   get:
  *     description: voir son compte
- *     tags: [Users]
+ *     tags: [Users account]
  *     parameters:
  *       - name: token
  *         description: token
@@ -145,7 +145,7 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
  * /api/users/account:
  *   patch:
  *     description: Mettre à jour son profil
- *     tags: [Users]
+ *     tags: [Users account]
  *     parameters:
  *       - name: token
  *         description: token
@@ -170,7 +170,7 @@ router.patch('/account', passport.authenticate('jwt', { session: false }), catch
  * /api/users/account:
  *   delete:
  *     description: Effacer son compte
- *     tags: [Users]
+ *     tags: [Users account]
  *     parameters:
  *       - name: token
  *         description: token
@@ -199,7 +199,7 @@ router.delete('/account', passport.authenticate('jwt', { session: false }), catc
  * /api/users/:id:
  *   patch:
  *     description: mise à jour du role et service de l'utilisateur
- *     tags: [Users]
+ *     tags: [Users admin]
  *     parameters:
  *       - name: token
  *         description: token
@@ -224,7 +224,7 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErro
  * /api/users/list:
  *   get:
  *     description: liste tous les utilisateurs
- *     tags: [Users]
+ *     tags: [Users admin]
  *     parameters:
  *       - name: token
  *         description: token
@@ -249,7 +249,7 @@ router.get('/list', passport.authenticate('jwt', { session: false }), catchError
  * /api/users/:id:
  *   get:
  *     description: Affiche la fiche utilisateur
- *     tags: [Users]
+ *     tags: [Users admin]
  *     parameters:
  *       - name: token
  *         description: token
@@ -274,7 +274,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors
  * /api/users/:id:
  *   delete:
  *     description: L'admin peut effacer un compte
- *     tags: [Users]
+ *     tags: [Users admin]
  *     parameters:
  *       - name: token
  *         description: token
