@@ -20,7 +20,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), uploadImage, 
 router.get('/:id', passport.authenticate('jwt', { session: false }), readOneAlert)
 
 // Read: Il peut voir toutes ses alertes
-router.get('/:id', passport.authenticate('jwt', { session: false }), readOneAlert)
+router.get('/list', passport.authenticate('jwt', { session: false }), readOneAlert)
 
 // Delete: Il peut supprimer son alerte
 router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteAlert)
@@ -36,7 +36,6 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   readOneAlert
 )
-
 
 // Il peut mettre à jour le status des alerts
 
