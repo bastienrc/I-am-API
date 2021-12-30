@@ -1,4 +1,8 @@
 import swaggerJsDoc from 'swagger-jsdoc'
+import dotenv from 'dotenv'
+
+// Variables d'environnement
+dotenv.config()
 
 const options = {
   definition: {
@@ -16,7 +20,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:8000',
+        url: process.env.SWAGGER_SERVER_URL,
         description: 'VillageAlert API Documentation'
       }
     ]
