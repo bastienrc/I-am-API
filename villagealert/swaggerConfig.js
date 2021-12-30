@@ -18,6 +18,7 @@ const options = {
       //   email: 'support@example.com'
       // }
     },
+    host: process.env.SWAGGER_SERVER_URL,
     servers: [
       {
         url: process.env.SWAGGER_SERVER_URL,
