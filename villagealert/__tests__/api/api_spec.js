@@ -1,15 +1,9 @@
 const frisby = require('frisby')
 const baseUrl = 'http://localhost:8000'
+// const baseUrl = 'https://villagealert.herokuapp.com'
 const timestamp = Date.now()
 const emailTest = `testAPI${timestamp}@gmail.com`
 const passwordTest = 'mdp123'
-const auth = {
-  request: {
-    headers: {
-      Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
-    }
-  }
-}
 
 //
 // USERS
@@ -42,7 +36,13 @@ it('Should be login', function () {
 // Test get account
 it('Should have this info user', function () {
   return frisby
-    .setup(auth)
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+        }
+      }
+    })
     .get(baseUrl + '/api/users/account')
     .expect('status', 200)
 })
@@ -50,7 +50,13 @@ it('Should have this info user', function () {
 // Test patch account
 it('Should update user account', function () {
   return frisby
-    .setup(auth)
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+        }
+      }
+    })
     .patch(baseUrl + '/api/users/account', {
       firstname: 'Luke',
       lastname: 'Skywalker'
@@ -61,7 +67,13 @@ it('Should update user account', function () {
 // Test delete account
 it('Should delete user account', function () {
   return frisby
-    .setup(auth)
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+        }
+      }
+    })
     .delete(baseUrl + '/api/users/account')
     .expect('status', 200)
 })
