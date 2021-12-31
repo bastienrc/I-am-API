@@ -130,6 +130,9 @@ router.post('/login', (req, res, next) => {
  *         description: envoie les données du citoyen
  *       400:
  *         description: error
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ *
  */
 router.get('/account', passport.authenticate('jwt', { session: false }), catchErrors(getAccount))
 
@@ -155,6 +158,8 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
  *         description: ...
  *       400:
  *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
  */
 router.patch('/account', passport.authenticate('jwt', { session: false }), catchErrors(updateAccount))
 
@@ -180,6 +185,8 @@ router.patch('/account', passport.authenticate('jwt', { session: false }), catch
  *         description: ...
  *       400:
  *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
  */
 router.delete('/account', passport.authenticate('jwt', { session: false }), catchErrors(deleteAccount))
 
@@ -209,6 +216,8 @@ router.delete('/account', passport.authenticate('jwt', { session: false }), catc
  *         description: ...
  *       400:
  *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
  */
 router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErrors(updateUser))
 
@@ -234,6 +243,8 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErro
  *         description: ...
  *       400:
  *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
  */
 router.get('/list', passport.authenticate('jwt', { session: false }), catchErrors(getAllUser))
 
@@ -259,6 +270,8 @@ router.get('/list', passport.authenticate('jwt', { session: false }), catchError
  *         description: ...
  *       400:
  *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
  */
 router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors(getOneUser))
 
@@ -284,6 +297,8 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors
  *         description: ...
  *       400:
  *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
  */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), catchErrors(deleteUser))
 
