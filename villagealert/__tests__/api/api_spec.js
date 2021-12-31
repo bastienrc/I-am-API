@@ -1,4 +1,5 @@
 const frisby = require('frisby')
+const Joi = frisby.Joi
 const baseUrl = 'http://localhost:8000'
 // const baseUrl = 'https://villagealert.herokuapp.com'
 const timestamp = Date.now()
@@ -31,6 +32,10 @@ it('Should be login', function () {
     password: passwordTest
   })
     .expect('status', 200)
+    .expect('jsonTypes', {
+      id: Joi.string().required(),
+      token: Joi.string().required()
+    })
 })
 
 // Test get account
@@ -39,7 +44,7 @@ it('Should have this info user', function () {
     .setup({
       request: {
         headers: {
-          Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+          Authorization: 'Bearer ' + Buffer.from('token')
         }
       }
     })
