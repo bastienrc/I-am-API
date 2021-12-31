@@ -20,7 +20,7 @@ const router = express.Router()
  * /api/users/signup:
  *   post:
  *     description: Création d'un compte
- *     tags: [Users]
+ *     tags: [Citoyen]
  *     parameters:
  *       - name: email
  *         description: email
@@ -75,7 +75,7 @@ router.post('/signup', passport.authenticate('signup', { session: false }), catc
  * /api/users/login:
  *   post:
  *     description: Connexion a son compte
- *     tags: [Users]
+ *     tags: [Citoyen]
  *     parameters:
  *       - name: email
  *         description: email
@@ -89,7 +89,7 @@ router.post('/signup', passport.authenticate('signup', { session: false }), catc
  *         required: true
  *     responses:
  *       200:
- *         description: Renvoie un token et l'id de l'utilisateur
+ *         description: Renvoie un token d'authentification
  *       400:
  *         description: Bad Request, vous n'auriez pas oublié quelque chose ?
  */
@@ -115,28 +115,21 @@ router.post('/login', (req, res, next) => {
 }
 )
 
+//
+// Citoyen connecté
+//
+
 /**
  * @openapi
  * /api/users/account:
  *   get:
  *     description: voir son compte
- *     tags: [Users account]
- *     parameters:
- *       - name: token
- *         description: token
- *         schema:
- *           type: string
- *         required: true
- *       - name: id
- *         description: id
- *         schema:
- *           type: string
- *         required: true
+ *     tags: [Citoyen connecté]
  *     responses:
  *       200:
- *         description: ...
+ *         description: envoie les données du citoyen
  *       400:
- *         description: ...
+ *         description: error
  */
 router.get('/account', passport.authenticate('jwt', { session: false }), catchErrors(getAccount))
 
@@ -145,7 +138,7 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
  * /api/users/account:
  *   patch:
  *     description: Mettre à jour son profil
- *     tags: [Users account]
+ *     tags: [Citoyen connecté]
  *     parameters:
  *       - name: token
  *         description: token
@@ -170,7 +163,7 @@ router.patch('/account', passport.authenticate('jwt', { session: false }), catch
  * /api/users/account:
  *   delete:
  *     description: Effacer son compte
- *     tags: [Users account]
+ *     tags: [Citoyen connecté]
  *     parameters:
  *       - name: token
  *         description: token
