@@ -5,6 +5,7 @@ const baseUrl = 'http://localhost:8000'
 const timestamp = Date.now()
 const emailTest = `testAPI${timestamp}@gmail.com`
 const passwordTest = 'mdp123'
+let authToken
 
 //
 // USERS
@@ -36,6 +37,10 @@ it('Should be login', function () {
       id: Joi.string().required(),
       token: Joi.string().required()
     })
+    .then(function (res) {
+      const data = JSON.parse(res.body)
+      authToken = Buffer.from(data.token)
+    })
 })
 
 // Test get account
@@ -44,7 +49,7 @@ it('Should have this info user', function () {
     .setup({
       request: {
         headers: {
-          Authorization: 'Bearer ' + Buffer.from('token')
+          Authorization: 'Bearer ' + authToken
         }
       }
     })
@@ -58,7 +63,7 @@ it('Should update user account', function () {
     .setup({
       request: {
         headers: {
-          Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+          Authorization: 'Bearer ' + authToken
         }
       }
     })
@@ -75,7 +80,7 @@ it('Should delete user account', function () {
     .setup({
       request: {
         headers: {
-          Authorization: 'Bearer ' + Buffer.from('token').toString('base64')
+          Authorization: 'Bearer ' + authToken
         }
       }
     })
