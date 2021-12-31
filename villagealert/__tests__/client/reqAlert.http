@@ -1,17 +1,23 @@
 ###
+### Test de l'API avec l'extension « REST Client » de Visual Studio Code
+### https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+###
+###
+
+###
 ### VARIABLES
 ###
 
 @baseUrl = http://localhost:8000
 @token = {{login.response.body.token}}
 @userId = {{login.response.body.id}}
-@email = test05@gmail.fr
+@email = test002@gmail.fr
 @password = Test62200
 @alertId = 61c0f70649023f0fbf8b45b5
 
 
 ###
-### USERS
+### Citoyen
 ###
 
 ### Signup
@@ -39,23 +45,37 @@ content-type: application/json
   "password": "{{password}}"
 }
 
-### Read: Affiche un utilisateur
-GET {{baseUrl}}/api/alerts/{{alertId}}
-Content-Type: application/json
+###
+### Citoyen Connecté
+###
+
+### Affiche le profil du Citoyen
+GET {{baseUrl}}/api/users/account HTTP/1.1
+content-type: application/json
 Authorization: Bearer {{token}}
 
-### Update: Modifie un utilisateur
-PATCH {{baseUrl}}/api/users/{{userId}} HTTP/1.1
+{
+  "id": "{{userId}}"
+}
+
+### Mise à jour du profil du Citoyen
+PATCH {{baseUrl}}/api/users/account HTTP/1.1
 content-type: application/json
 
 {
-  "lastname": "Albert"
+  "id": "{{userId}}",
+  "firstname": "David",
+  "lastname": "Vincent"
 }
 
+### Supprime le profil du Citoyen
+DELETE {{baseUrl}}/api/users/account HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
 
-###
-### Alert
-###
+{
+  "id": "{{userId}}"
+}
 
 ### Create: Envoie d'une alerte
 POST {{baseUrl}}/api/alerts HTTP/1.1
@@ -70,16 +90,52 @@ Authorization: Bearer {{token}}
 }
 
 ### Read All: Liste toute les alertes
-GET {{baseUrl}}/api/alerts
+GET {{baseUrl}}/api/alerts/list
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-### Read: Affiche une alerte
+### Read: Affiche l'alerte :alertId
 GET {{baseUrl}}/api/alerts/{{alertId}}
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
-### Delete: Efface une chambre
+### Delete: Efface l'alerte :alertId
 DELETE {{baseUrl}}/api/alerts/{{alertId}} HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}
+
+###
+### Responsable
+###
+
+### Patch: Mise à jour du status de l'alerte
+PATCH {{baseUrl}}/api/alerts/{{{userId}}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "status": "doing"
+}
+
+###
+### Admin
+###
+
+### ReadOne: Affiche l'utilisateur :userId
+GET {{baseUrl}}/api/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### ReadAll: Affiche tous les utilisateurs
+GET {{baseUrl}}/api/users/list
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Update: Modifie l'utilisateur :userId
+PATCH {{baseUrl}}/api/users/{{userId}} HTTP/1.1
+content-type: application/json
+
+{
+  "firstname": "Donald",
+  "lastname": "Duck"
+}
