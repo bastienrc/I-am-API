@@ -1,5 +1,8 @@
 import express from 'express'
-import { readAllAlerts, readOneAlert, newAlert, deleteAlert } from '../controllers/alert.controller.js'
+import {
+  readOneAlert, newAlert, deleteAlert,
+  readOwnAlerts, readServiceAlerts, updateAlert
+} from '../controllers/alert.controller.js'
 import uploadImage from '../utils/cloudinary.js'
 import passport from 'passport'
 import dotenv from 'dotenv'
@@ -20,7 +23,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), uploadImage, 
 router.get('/:id', passport.authenticate('jwt', { session: false }), readOneAlert)
 
 // Read: Il peut voir toutes ses alertes
-router.get('/list', passport.authenticate('jwt', { session: false }), readOneAlert)
+router.get('/list', passport.authenticate('jwt', { session: false }), readOwnAlerts)
 
 // Delete: Il peut supprimer son alerte
 router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteAlert)
@@ -29,25 +32,10 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteAl
 // Responsable
 //
 
-// Il peut voir la liste des alertes selon son service
-// Read
-router.get(
-  '/:id',
-  passport.authenticate('jwt', { session: false }),
-  readOneAlert
-)
+// Read: Il peut voir la liste des alertes selon son service
+router.get('/list', passport.authenticate('jwt', { session: false }), readServiceAlerts)
 
-// Il peut mettre à jour le status des alerts
-
-//
-// Admin
-//
-
-// Read All
-router.get(
-  '/',
-  passport.authenticate('jwt', { session: false }),
-  readAllAlerts
-)
+// Read: Il peut mettre à jour le status des alerts
+router.patch('/:id', passport.authenticate('jwt', { session: false }), updateAlert)
 
 export default router
