@@ -106,7 +106,7 @@ router.post('/login', (req, res, next) => {
 
         const body = { _id: user._id, email: user.email }
         const token = jwt.sign({ user: body }, process.env.SECRET_KEY)
-        res.json({ id: user._id, token })
+        res.json({ token })
       })
     } catch (error) {
       return next(error)
