@@ -1,14 +1,24 @@
 import UserModel from '../models/user.model.js'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+
+// Variables d'environnement
+dotenv.config()
+
+function userIdfromToken (req) {
+  const token = req.headers.authorization.split(' ')[1]
+  const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
+  return decodedToken.user._id
+}
 
 export async function signup (req, res, next) {
   res.json({
-    message: 'Signup OK',
-    user: req.user
+    message: 'Signup OK'
   })
 }
 
-export const getAccount = async (req, res) => {
-  const users = await UserModel.find({ _id: req.params.id })
+export const getAccount = async (req, res, next) => {
+  const users = await UserModel.find({ _id: userIdfromToken(req) })
   res.send(users[0])
 }
 
