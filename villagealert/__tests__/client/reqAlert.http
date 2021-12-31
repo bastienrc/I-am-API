@@ -57,6 +57,7 @@ Authorization: Bearer {{token}}
 ### Mise à jour du profil du Citoyen
 PATCH {{baseUrl}}/api/users/account HTTP/1.1
 content-type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstname": "David",

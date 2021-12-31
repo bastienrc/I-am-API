@@ -29,8 +29,9 @@ export const updateUser = (req, res, next) => {
 }
 
 export const updateAccount = (req, res, next) => {
-  UserModel.updateOne({ _id: req.params.id }, { ...req.body, _id: req.params.id })
-    .then(() => res.status(200).json({ message: 'Utilisateur modifié !' }))
+  const userId = userIdfromToken(req)
+  UserModel.updateOne({ _id: userId }, { ...req.body, _id: userId })
+    .then(() => res.status(200).json({ message: 'Votre compte a été modifié !' }))
     .catch(error => res.status(404).json({ error }))
 }
 

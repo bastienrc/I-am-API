@@ -161,7 +161,7 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.patch('/account', passport.authenticate('jwt', { session: false }), catchErrors(updateAccount))
+router.patch('/account', passport.authenticate('jwt', { session: false }), updateAccount)
 
 /**
  * @openapi
