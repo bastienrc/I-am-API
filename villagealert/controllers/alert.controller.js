@@ -7,7 +7,19 @@ export function readOneAlert (req, res, next) {
     .catch(error => res.status(404).json({ error }))
 }
 
-export function readAllAlerts (req, res, next) {
+export function readOwnAlerts (req, res, next) {
+  Alert.find()
+    .then(alerts => res.status(200).json(alerts))
+    .catch(error => res.status(400).json({ error }))
+}
+
+export function readServiceAlerts (req, res, next) {
+  Alert.find()
+    .then(alerts => res.status(200).json(alerts))
+    .catch(error => res.status(400).json({ error }))
+}
+
+export function updateAlert (req, res, next) {
   Alert.find()
     .then(alerts => res.status(200).json(alerts))
     .catch(error => res.status(400).json({ error }))
