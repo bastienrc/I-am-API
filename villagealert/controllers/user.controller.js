@@ -35,13 +35,14 @@ export const updateAccount = (req, res, next) => {
     .catch(error => res.status(404).json({ error }))
 }
 
-export const deleteUser = (req, res, next) => {
-  UserModel.findByIdAndDelete(req.params.id)
+export const deleteAccount = (req, res, next) => {
+  const userId = userIdfromToken(req)
+  UserModel.findByIdAndDelete(userId)
     .then(() => res.status(200).json({ message: 'Utilisateur supprimé !' }))
     .catch(error => res.status(400).json({ error }))
 }
 
-export const deleteAccount = (req, res, next) => {
+export const deleteUser = (req, res, next) => {
   UserModel.findByIdAndDelete(req.params.id)
     .then(() => res.status(200).json({ message: 'Utilisateur supprimé !' }))
     .catch(error => res.status(400).json({ error }))
