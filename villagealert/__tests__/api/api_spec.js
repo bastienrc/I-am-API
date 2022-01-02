@@ -75,6 +75,7 @@ it('Should update user account', function () {
       lastname: 'Skywalker'
     })
     .expect('status', 200)
+    .expect('json', { message: 'Votre compte a été modifié !' })
 })
 
 // Test delete account
@@ -89,6 +90,7 @@ it('Should delete user account', function () {
     })
     .delete(baseUrl + '/api/users/account')
     .expect('status', 200)
+    .expect('json', { message: 'Votre compte a été supprimé !' })
 })
 
 // Test post alert

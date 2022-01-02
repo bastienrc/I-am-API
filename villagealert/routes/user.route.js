@@ -155,9 +155,7 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
  *         required: true
  *     responses:
  *       200:
- *         description: ...
- *       400:
- *         description: ...
+ *         description: Votre compte a été modifié !
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
@@ -182,13 +180,13 @@ router.patch('/account', passport.authenticate('jwt', { session: false }), updat
  *         required: true
  *     responses:
  *       200:
- *         description: ...
+ *         description: Votre compte a été supprimé !
  *       400:
  *         description: ...
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.delete('/account', passport.authenticate('jwt', { session: false }), catchErrors(deleteAccount))
+router.delete('/account', passport.authenticate('jwt', { session: false }), deleteAccount)
 
 //
 // Admin
