@@ -8,7 +8,7 @@ const passwordTest = 'mdp123'
 let authToken
 
 //
-// USERS
+// Citoyen
 //
 
 // Test de création de compte
@@ -34,7 +34,6 @@ it('Should be login', function () {
   })
     .expect('status', 200)
     .expect('jsonTypes', {
-      id: Joi.string().required(),
       token: Joi.string().required()
     })
     .then(function (res) {
@@ -42,6 +41,10 @@ it('Should be login', function () {
       authToken = Buffer.from(data.token)
     })
 })
+
+//
+// Citoyen connecté
+//
 
 // Test get account
 it('Should have this info user', function () {
@@ -85,5 +88,80 @@ it('Should delete user account', function () {
       }
     })
     .delete(baseUrl + '/api/users/account')
+    .expect('status', 200)
+})
+
+// Test post alert
+it('Should post my Alert', function () {
+  return frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + authToken
+        }
+      }
+    })
+    .delete(baseUrl + '/api/alerts/')
+    .expect('status', 200)
+})
+
+// Test get alert
+it('Should get list Alert', function () {
+  return frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + authToken
+        }
+      }
+    })
+    .delete(baseUrl + '/api/alerts/list')
+    .expect('status', 200)
+})
+
+// Test get alert id
+const idAlert = 0
+it('Should get Alert id', function () {
+  return frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + authToken
+        }
+      }
+    })
+    .delete(baseUrl + '/api/alerts/' + idAlert)
+    .expect('status', 200)
+})
+
+// Test delete alert id
+it('Should delete Alert id', function () {
+  return frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + authToken
+        }
+      }
+    })
+    .delete(baseUrl + '/api/alerts/' + idAlert)
+    .expect('status', 200)
+})
+
+//
+// Responsable
+//
+
+// Test patch alert id by responsable only
+it('Should get Alert id', function () {
+  return frisby
+    .setup({
+      request: {
+        headers: {
+          Authorization: 'Bearer ' + authToken
+        }
+      }
+    })
+    .delete(baseUrl + '/api/alerts/' + idAlert)
     .expect('status', 200)
 })
