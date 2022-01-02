@@ -71,14 +71,25 @@ Authorization: Bearer {{token}}
 
 ### Create: Envoie d'une alerte
 POST {{baseUrl}}/api/alerts HTTP/1.1
-Content-Type: application/json
+Content-Type: multipart/form-data; boundary=---border
 Authorization: Bearer {{token}}
 
+---border
+Content-Disposition: form-data; name="body"
+Content-Type: application/json
+
 {
-  "type": "voirie",
-  "description": "Mon voisin est un con 2 !",
-  "address": "Mars"
+  "typeAlert": "voirie",
+  "description": "Mon voisin est un con finis !",
+  "addressAlert": "Mars"
 }
+
+---border
+Content-Disposition: form-data; name="photo"; filename="imageTest.jpg"
+Content-Type: image/jpg
+
+< ../imageTest.jpg
+---border
 
 ### Read All: Liste toute les alertes
 GET {{baseUrl}}/api/alerts/list
