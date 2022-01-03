@@ -117,7 +117,7 @@ it('Should get list Alert', function () {
         }
       }
     })
-    .delete(baseUrl + '/api/alerts/list')
+    .delete(baseUrl + '/api/alerts/')
     .expect('status', 200)
 })
 
