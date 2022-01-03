@@ -23,7 +23,8 @@ const UserSchema = Schema({
   service: {
     type: String,
     trim: true,
-    enum: ['voirie', 'stationnement', 'travaux', 'autre']
+    enum: ['voirie', 'stationnement', 'travaux', 'autre', 'none'],
+    default: 'none'
   },
   firstname: {
     type: String,
