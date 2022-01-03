@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 // Variables d'environnement
 dotenv.config()
 
-function userIdfromToken (req) {
+export function userIdfromToken (req) {
   const token = req.headers.authorization.split(' ')[1]
   const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
   return decodedToken.user

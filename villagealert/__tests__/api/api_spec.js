@@ -103,8 +103,13 @@ it('Should post my Alert', function () {
         }
       }
     })
-    .delete(baseUrl + '/api/alerts/')
-    .expect('status', 200)
+    .post(baseUrl + '/api/alerts/', {
+      typeAlert: 'voirie',
+      description: 'Mon voisin est un con finis !',
+      addressAlert: 'Mars'
+    })
+    .expect('status', 201)
+    .expect('json', { message: 'Votre alerte a bien été enregistrée!' })
 })
 
 // Test get alert
@@ -117,12 +122,12 @@ it('Should get list Alert', function () {
         }
       }
     })
-    .delete(baseUrl + '/api/alerts/')
+    .get(baseUrl + '/api/alerts/')
     .expect('status', 200)
 })
 
 // Test get alert id
-const idAlert = 0
+const idAlert = '61d2bd0602ff2b76a35750e9'
 it('Should get Alert id', function () {
   return frisby
     .setup({
@@ -132,7 +137,7 @@ it('Should get Alert id', function () {
         }
       }
     })
-    .delete(baseUrl + '/api/alerts/' + idAlert)
+    .get(baseUrl + '/api/alerts/' + idAlert)
     .expect('status', 200)
 })
 
@@ -155,7 +160,8 @@ it('Should delete Alert id', function () {
 //
 
 // Test patch alert id by responsable only
-it('Should get Alert id', function () {
+const idAlert2 = '61d2bfeb0999c004c5717391'
+it('Should patch Alert id', function () {
   return frisby
     .setup({
       request: {
@@ -164,6 +170,11 @@ it('Should get Alert id', function () {
         }
       }
     })
-    .delete(baseUrl + '/api/alerts/' + idAlert)
+    .patch(baseUrl + '/api/alerts/' + idAlert2,
+      {
+        firstname: 'Donald',
+        lastname: 'Duck'
+      }
+    )
     .expect('status', 200)
 })
