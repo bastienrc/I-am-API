@@ -1,0 +1,75 @@
+//
+// MongoDB Fixtures
+//
+
+// On selectionne la base de donnée
+use('villagealert')
+
+// On vide la collection
+db.users.drop()
+
+// On insert quelques documents pour tester les différents cas d'utilisation
+db.users.insertMany([
+  { _id: 'abcA00', email: 'test000@gmail.com', firstname: 'Albert', lastname: 'Karcher', service: 'none', password: 'Test62200', role: 'admin', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcR01', email: 'test001@gmail.com', firstname: 'Bertrand', lastname: 'Lovelace', service: 'voirie', password: 'Test62200', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcC02', email: 'test002@gmail.com', firstname: 'Cassie', lastname: 'Mekor', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcC03', email: 'test003@gmail.com', firstname: 'Deborah', lastname: 'Neant', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcC04', email: 'test004@gmail.com', firstname: 'Elodie', lastname: 'Olivier', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcR05', email: 'test005@gmail.com', firstname: 'Fanny', lastname: 'Paris', service: 'stationnement', password: 'Test62200', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcC06', email: 'test006@gmail.com', firstname: 'Gerald', lastname: 'Queen', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcC07', email: 'test007@gmail.com', firstname: 'Hector', lastname: 'Renaud', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcR08', email: 'test008@gmail.com', firstname: 'Iréne', lastname: 'Sergent', service: 'travaux', password: 'Test62200', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: 'abcC09', email: 'test009@gmail.com', firstname: 'Jacque', lastname: 'Teberus', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' }
+]);
+
+// On vide la collection
+db.alerts.drop()
+
+// On insert quelques documents pour tester les différents cas d'utilisation
+db.alerts.insertMany([
+  { _id: 'alert0101', 'userId': 'abcR01', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0102', 'userId': 'abcR01', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0103', 'userId': 'abcR01', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0104', 'userId': 'abcR01', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0105', 'userId': 'abcR01', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0201', 'userId': 'abcC02', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0202', 'userId': 'abcC02', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0203', 'userId': 'abcC02', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0204', 'userId': 'abcC02', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0205', 'userId': 'abcC02', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0301', 'userId': 'abcC03', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0302', 'userId': 'abcC03', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0303', 'userId': 'abcC03', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0304', 'userId': 'abcC03', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0305', 'userId': 'abcC03', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0401', 'userId': 'abcC04', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0402', 'userId': 'abcC04', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0403', 'userId': 'abcC04', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0404', 'userId': 'abcC04', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0405', 'userId': 'abcC04', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0501', 'userId': 'abcR05', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0502', 'userId': 'abcR05', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0503', 'userId': 'abcR05', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0504', 'userId': 'abcR05', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0505', 'userId': 'abcR05', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0601', 'userId': 'abcC06', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0602', 'userId': 'abcC06', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0603', 'userId': 'abcC06', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0604', 'userId': 'abcC06', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0605', 'userId': 'abcC06', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0701', 'userId': 'abcC07', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0702', 'userId': 'abcC07', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0703', 'userId': 'abcC07', 'typeAlert': 'stationnement', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0704', 'userId': 'abcC07', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0705', 'userId': 'abcC07', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0801', 'userId': 'abcR08', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0802', 'userId': 'abcR08', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0803', 'userId': 'abcR08', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0804', 'userId': 'abcR08', 'typeAlert': 'autre', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0805', 'userId': 'abcR08', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0901', 'userId': 'abcC09', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0902', 'userId': 'abcC09', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0903', 'userId': 'abcC09', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0904', 'userId': 'abcC09', 'typeAlert': 'travaux', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' },
+  { _id: 'alert0905', 'userId': 'abcC09', 'typeAlert': 'voirie', 'description': 'Il y a un trou dans la route !', 'addressAlert': 'Chez moi', 'photo': 'https://res.cloudinary.com/dst3lhrfa/image/upload/v1641233703/alertImages/wwkyezteskcdbjf8xt5a.jpg' }
+]);
