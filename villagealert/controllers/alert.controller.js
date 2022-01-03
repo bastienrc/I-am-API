@@ -1,4 +1,5 @@
 import Alert from '../models/alert.model.js'
+// import UserModel from '../models/user.model.js'
 import sendMail from '../utils/sendMail.js'
 import dotenv from 'dotenv'
 import { userIdfromToken } from './user.controller.js'
@@ -40,12 +41,24 @@ function mailAlert (info) {
     city,
     phone,
     email,
+    // userId,
     description,
     dateBegin,
     dateEnd,
     addressAlert,
     photo
   } = info
+
+  // async function userInfo (userId) {
+  //   const data = await UserModel.find({ _id: userId })
+  //   return data
+  // }
+
+  // console.log(userInfo(userId))
+
+  // const {
+  // } = userInfo.then(data => data)
+  // console.log(userInfo.then(data => console.log(data)))
 
   return `
     <h2>Alerte Citoyenne</h2>
