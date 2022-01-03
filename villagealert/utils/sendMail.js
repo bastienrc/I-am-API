@@ -39,4 +39,5 @@ export default async function (from, to, subject, message) {
   // Preview only available when sending through an Ethereal account
   console.log('Preview URL: %s', getTestMessageUrl(info))
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  return 'Preview URL: ' + getTestMessageUrl(info)
 }
