@@ -1,7 +1,7 @@
 {
   "client": "Thunder Client",
   "collectionName": "villageAlert",
-  "dateExported": "2021-12-31T17:24:25.230Z",
+  "dateExported": "2022-01-03T18:04:49.922Z",
   "version": "1.1",
   "folders": [
     {
@@ -71,13 +71,13 @@
       "name": "Signup",
       "url": "http://localhost:8000/api/users/signup",
       "method": "POST",
-      "modified": "2021-12-31T17:09:04.850Z",
+      "modified": "2022-01-03T17:59:30.189Z",
       "created": "2021-12-31T16:19:21.805Z",
       "_id": "c6441141-ff0f-44cc-93d2-46e1ce72ae38",
       "params": [],
       "body": {
         "type": "json",
-        "raw": "{\r\n  \"email\": \"testThunder002@gmail.com\",\r\n  \"password\": \"Test62200\",\r\n  \"firstname\": \"Pat\",\r\n  \"lastname\": \"Hibulaire\",\r\n  \"address\": \"42 rue nullepart ailleurs\",\r\n  \"phone\": \"0123456789\",\r\n  \"city\": \"Calais\",\r\n  \"postCode\": \"62200\"\r\n}",
+        "raw": "{\n  \"email\": \"testThunder002@gmail.com\",\n  \"password\": \"Test62200\",\n  \"firstname\": \"Pat\",\n  \"lastname\": \"Hibulaire\",\n  \"address\": \"42 rue nullepart ailleurs\",\n  \"phone\": \"0123456789\",\n  \"city\": \"Calais\",\n  \"postCode\": \"62200\"\n}",
         "form": []
       },
       "auth": {
@@ -147,13 +147,17 @@
         {
           "name": "User-Agent",
           "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}"
         }
       ],
       "colId": "00d8d7d0-46dc-4f2a-95eb-bb9df4ca07f2",
       "name": "Envoie d'une alerte",
       "url": "http://localhost:8000/api/alerts/",
       "method": "POST",
-      "modified": "2021-12-31T17:11:24.601Z",
+      "modified": "2022-01-03T18:01:56.641Z",
       "created": "2021-12-16T17:58:53.934Z",
       "_id": "71b3c571-6915-40ef-8849-4b88e3f959a7",
       "params": [],
@@ -235,13 +239,17 @@
         {
           "name": "User-Agent",
           "value": "Thunder Client (https://www.thunderclient.io)"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer {{token}}"
         }
       ],
       "colId": "00d8d7d0-46dc-4f2a-95eb-bb9df4ca07f2",
       "name": "Envoie d'une alerte avec image",
       "url": "http://localhost:8000/api/alerts/",
       "method": "POST",
-      "modified": "2021-12-31T17:11:26.953Z",
+      "modified": "2022-01-03T18:03:11.173Z",
       "created": "2021-12-16T17:58:53.934Z",
       "_id": "adbfe7db-20ba-4586-8bc4-bd934940a876",
       "params": [],
@@ -293,7 +301,7 @@
         "files": [
           {
             "name": "photo",
-            "value": "/data/Images/be57ff4521c2c037d387a88a7b4afb4f.jpg"
+            "value": "/home/bastienrc/Lab/SimplonCDA/Projets/I-am-API/villagealert/__tests__/imageTest.jpg"
           }
         ]
       },
