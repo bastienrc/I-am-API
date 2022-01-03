@@ -7,19 +7,34 @@ Version de l'api avec Express.
   - Envoie d'alerte
   - Gestion des photos
   - Envoie de mails
-  - Gestion users avec ACL
+  - Gestion des utilisateurs
+  - Gestion des accès selon le role des utilisateurs
   - Authentication avec passport: 
     - passport-local: http://www.passportjs.org/packages/passport-local
+  - Test unitaire avec [Jest](https://jestjs.io)
+  - Test des endpoints de l'api avec [Frisby](https://docs.frisbyjs.com)
+  - Documentation avec Swagger à l'adresse : http://localhost:8000/api-docs
 
-## Installation & Démarage
+## Mode d'emploi
 
 ```sh
-yarn install
+# Installation
+git clone git@github.com:bastienrc/I-am-API.git
+cd villagealert && yarn install
+
+# Lancement
 yarn start
+
+# Test
+yarn test
 ```
 
 ## Test
 
-Les tests sont réalisables avec l'extension **Thunder Client**.
+Les tests peuvent être fait avec l'extension:
+  - [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+  - [Thunder Client](https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client)
 
-Importer depuis l'extension le fichier suivant : [Thunder Client Collection VillageAlert](test/thunder-collection_villageAlert.json)
+Des fixtures peuvent être déployer avec [l'extension de MongoDB pour VSCode](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode)
+
+Tous les fichiers se trouvent dans le dossier [\_\_tests__](__tests__)
