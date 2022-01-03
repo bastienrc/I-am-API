@@ -13,7 +13,7 @@
 @userId = ''
 @email = test342@gmail.fr
 @password = Test62200
-@alertId = 61c0f70649023f0fbf8b45b5
+@alertId = 61d2b7d89349f2d847da06b6
 
 
 ###
@@ -71,6 +71,17 @@ Authorization: Bearer {{token}}
 
 ### Create: Envoie d'une alerte
 POST {{baseUrl}}/api/alerts HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "typeAlert": "voirie",
+  "description": "Mon voisin est un con finis !",
+  "addressAlert": "Mars"
+}
+
+### Create: Envoie d'une alerte avec image (marche pas)
+POST {{baseUrl}}/api/alerts HTTP/1.1
 Content-Type: multipart/form-data; boundary=---border
 Authorization: Bearer {{token}}
 
@@ -92,7 +103,7 @@ Content-Type: image/jpg
 ---border
 
 ### Read All: Liste toute les alertes
-GET {{baseUrl}}/api/alerts/list
+GET {{baseUrl}}/api/alerts
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
