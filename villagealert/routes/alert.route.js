@@ -6,36 +6,119 @@ import {
 import uploadImage from '../utils/cloudinary.js'
 import passport from 'passport'
 import dotenv from 'dotenv'
-// import { catchErrors } from '../utils/helpers.js'
 
 dotenv.config()
 
 const router = express.Router()
 
 //
-// Citoyen
+// Citoyen connecté
 //
 
-// Create
+/**
+ * @openapi
+ * /api/alerts/:
+ *   post:
+ *     description: créer la fiche utilisateur
+ *     tags: [Citoyen connecté]
+ *     parameters:
+ *       - name: typeAlert
+ *         description: type de l'alerte (voirie, stationnement, travaux, autre)
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: description
+ *         description: description de l'alerte
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - name: addressAlert
+ *         description: adresse de l'alerte
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       201:
+ *         description: ...
+ *       400:
+ *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ */
 router.post('/', passport.authenticate('jwt', { session: false }), uploadImage, newAlert)
 
-// Read: Il peut voir son alerte
+/**
+ * @openapi
+ * /api/alerts/:id:
+ *   get:
+ *     description: affiche la fiche alerte :id
+ *     tags: [Citoyen connecté]
+ *     responses:
+ *       200:
+ *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ */
 router.get('/:id', passport.authenticate('jwt', { session: false }), readOneAlert)
 
-// Read: Il peut voir toutes ses alertes
+/**
+ * @openapi
+ * /api/alerts/:
+ *   get:
+ *     description: affiche toutes ses alertes
+ *     tags: [Citoyen connecté]
+ *     responses:
+ *       200:
+ *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ */
 router.get('/', passport.authenticate('jwt', { session: false }), readOwnAlerts)
 
-// Delete: Il peut supprimer son alerte
+/**
+ * @openapi
+ * /api/alerts/id:
+ *   delete:
+ *     description: supprime une alert :id
+ *     tags: [Citoyen connecté]
+ *     responses:
+ *       200:
+ *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ */
 router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteAlert)
 
 //
 // Responsable
 //
 
-// Read: Il peut voir la liste des alertes selon son service
-router.get('/list', passport.authenticate('jwt', { session: false }), readServiceAlerts)
+/**
+ * @openapi
+ * /api/alerts/:list:
+ *   get:
+ *     description: voie la liste des alertes selon son service
+ *     tags: [Responsable]
+ *     responses:
+ *       200:
+ *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ */
+router.get('/:list', passport.authenticate('jwt', { session: false }), readServiceAlerts)
 
-// Read: Il peut mettre à jour le status des alerts
+/**
+ * @openapi
+ * /api/alerts/:id:
+ *   patch:
+ *     description: peut mettre à jour le status de l'alert :id
+ *     tags: [Responsable]
+ *     responses:
+ *       200:
+ *         description: ...
+ *       401:
+ *         description: Unauthorized, vous n'êtes pas connecté
+ */
 router.patch('/:id', passport.authenticate('jwt', { session: false }), updateAlert)
 
 export default router

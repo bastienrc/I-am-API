@@ -197,7 +197,7 @@ router.delete('/account', passport.authenticate('jwt', { session: false }), dele
  * /api/users/:id:
  *   patch:
  *     description: mise à jour du role et service de l'utilisateur
- *     tags: [Users admin]
+ *     tags: [Admin]
  *     parameters:
  *       - name: token
  *         description: token
@@ -224,7 +224,7 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErro
  * /api/users/list:
  *   get:
  *     description: liste tous les utilisateurs
- *     tags: [Users admin]
+ *     tags: [Admin]
  *     parameters:
  *       - name: token
  *         description: token
@@ -251,7 +251,7 @@ router.get('/list', passport.authenticate('jwt', { session: false }), catchError
  * /api/users/:id:
  *   get:
  *     description: Affiche la fiche utilisateur
- *     tags: [Users admin]
+ *     tags: [Admin]
  *     parameters:
  *       - name: token
  *         description: token
@@ -278,7 +278,7 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors
  * /api/users/:id:
  *   delete:
  *     description: L'admin peut effacer un compte
- *     tags: [Users admin]
+ *     tags: [Admin]
  *     parameters:
  *       - name: token
  *         description: token
