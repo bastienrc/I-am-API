@@ -13,7 +13,7 @@ Version de l'api avec Express.
     - passport-local: http://www.passportjs.org/packages/passport-local
   - Test unitaire avec [Jest](https://jestjs.io)
   - Test des endpoints de l'api avec [Frisby](https://docs.frisbyjs.com)
-  - Documentation avec Swagger à l'adresse : http://localhost:8000/api-docs
+  - Documentation avec Swagger à l'adresse : https://villagealert.herokuapp.com/api-docs
 
 ## Mode d'emploi
 
