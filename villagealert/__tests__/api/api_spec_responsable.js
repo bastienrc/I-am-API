@@ -1,180 +1,256 @@
+const dotenv = require('dotenv')
 const frisby = require('frisby')
 const Joi = frisby.Joi
-const baseUrl = 'http://localhost:8000'
-// const baseUrl = 'https://villagealert.herokuapp.com'
-const timestamp = Date.now()
-const emailTest = `testAPI${timestamp}@gmail.com`
-const passwordTest = 'mdp123'
+
+// Variables d'environnement
+dotenv.config()
+const baseUrl = 'http://localhost:' + process.env.PORT || 3500
+
 let authToken
 
-//
-// Citoyen
-//
+describe('Test Admin', () => {
+  //
+  // Connexion
+  //
+  describe('Connexion', () => {
+    it('It should be login', function () {
+      return frisby.post(baseUrl + '/api/users/login', {
+        email: 'admin@gmail.com',
+        password: 'Admin000'
+      })
+        .expect('status', 200)
+        .expect('jsonTypes', {
+          token: Joi.string().required()
+        })
+        .then(function (res) {
+          const data = JSON.parse(res.body)
+          authToken = Buffer.from(data.token)
+        })
+    })
 
-// Test de création de compte
-it('Should be signup', function () {
-  return frisby.post(baseUrl + '/api/users/signup', {
-    email: emailTest,
-    password: passwordTest,
-    firstname: 'Pat',
-    lastname: 'Hibulaire',
-    address: '42 rue nullepart ailleurs',
-    phone: '0123456789',
-    city: 'Calais',
-    postCode: '62200'
+    it('It should have an error if password is wrong', function () {
+      return frisby.post(baseUrl + '/api/users/login', {
+        email: 'admin@gmail.com',
+        password: 'Mauvais mot de passe'
+      })
+        .expect('status', 400)
+        .expect('json', { message: 'Identifiants incorrect' })
+    })
   })
-    .expect('status', 200)
-})
 
-// Test de connexion
-it('Should be login', function () {
-  return frisby.post(baseUrl + '/api/users/login', {
-    email: emailTest,
-    password: passwordTest
+  //
+  // Profil
+  //
+  describe('Account', () => {
+    // Read
+    it('It should have this info', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .get(baseUrl + '/api/users/account')
+        .expect('status', 200)
+    })
+
+    // Update
+    it('It should update this info', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .patch(baseUrl + '/api/users/account', {
+          firstname: 'Anakin',
+          lastname: 'Skywalker'
+        })
+        .expect('status', 200)
+        .expect('json', { message: 'Votre compte a été modifié !' })
+    })
+
+    // Delete
+    it('It should can delete this account', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .delete(baseUrl + '/api/users/account')
+        .expect('status', 200)
+        .expect('json', { message: 'Votre compte a été supprimé !' })
+    })
   })
-    .expect('status', 200)
-    .expect('jsonTypes', {
-      token: Joi.string().required()
-    })
-    .then(function (res) {
-      const data = JSON.parse(res.body)
-      authToken = Buffer.from(data.token)
-    })
-})
 
-//
-// Citoyen connecté
-//
+  //
+  // Gestion des utilisateurs
+  //
+  describe('User', () => {
+    // Create
+    it('It should can signup a user !', function () {
+      return frisby
+        .post(baseUrl + '/api/users/signup', {
+          email: 'newAdmin@gmail.com',
+          password: 'Admin000'
+        })
+        .expect('status', 201)
+        .expect('json', { message: 'Signup OK' })
+    })
 
-// Test get account
-it('Should have this info user', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // Read All
+    it('Should have the infos list users', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .get(baseUrl + '/api/users/')
+        .expect('status', 200)
     })
-    .get(baseUrl + '/api/users/account')
-    .expect('status', 200)
-})
 
-// Test patch account
-it('Should update user account', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // Read
+    const userId = '6123485817a234f7e06a4a8f'
+    it('Should have the info userTest', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .get(baseUrl + '/api/users/' + userId)
+        .expect('status', 200)
     })
-    .patch(baseUrl + '/api/users/account', {
-      firstname: 'Luke',
-      lastname: 'Skywalker'
-    })
-    .expect('status', 200)
-    .expect('json', { message: 'Votre compte a été modifié !' })
-})
 
-// Test delete account
-it('Should delete user account', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // Update
+    it('Should update userTest', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .patch(baseUrl + '/api/users/' + userId, {
+          firstname: 'Luke',
+          lastname: 'Skywalker'
+        })
+        .expect('status', 200)
+        .expect('json', { message: 'Le compte a été modifié !' })
     })
-    .delete(baseUrl + '/api/users/account')
-    .expect('status', 200)
-    .expect('json', { message: 'Votre compte a été supprimé !' })
-})
 
-// Test post alert
-it('Should post my Alert', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // Delete
+    it('Should delete userTest', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .delete(baseUrl + '/api/users/' + userId)
+        .expect('status', 200)
+        .expect('json', { message: 'Le compte a été supprimé !' })
     })
-    .post(baseUrl + '/api/alerts/', {
-      typeAlert: 'voirie',
-      description: 'Mon voisin est un con finis !',
-      addressAlert: 'Mars'
-    })
-    .expect('status', 201)
-    .expect('json', { message: 'Votre alerte a bien été enregistrée!' })
-})
+  })
 
-// Test get alert
-it('Should get list Alert', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+  //
+  // Role
+  //
+  describe('Role', () => {
+  // Create: Ajout d'un role
+    it('Should create a new role', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .post(baseUrl + '/api/roles', {
+          roleName: 'test'
+        })
+        .expect('status', 201)
     })
-    .get(baseUrl + '/api/alerts/')
-    .expect('status', 200)
-})
 
-// Test get alert id
-const idAlert = '61d2bd0602ff2b76a35750e9'
-it('Should get Alert id', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // ReadAll
+    it('Should view list role', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .get(baseUrl + '/api/roles')
+        .expect('status', 200)
     })
-    .get(baseUrl + '/api/alerts/' + idAlert)
-    .expect('status', 200)
-})
 
-// Test delete alert id
-it('Should delete Alert id', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // ReadOne
+    const roleId = '1110485817a09ff7e06a4a8f'
+    it('Should view role', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .get(baseUrl + '/api/roles/' + roleId)
+        .expect('status', 200)
     })
-    .delete(baseUrl + '/api/alerts/' + idAlert)
-    .expect('status', 200)
-})
 
-//
-// Responsable
-//
-
-// Test patch alert id by responsable only
-const idAlert2 = '61d2bfeb0999c004c5717391'
-it('Should patch Alert id', function () {
-  return frisby
-    .setup({
-      request: {
-        headers: {
-          Authorization: 'Bearer ' + authToken
-        }
-      }
+    // Update
+    it('Should update role', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .patch(baseUrl + '/api/roles/' + roleId, {
+          auths: [
+            { url: 'get /api/users/account', auth: true },
+            { url: 'patch /api/users/account', auth: true },
+            { url: 'delete /api/users/account', auth: false }
+          ]
+        })
+        .expect('status', 200)
+        .expect('json', { message: 'Le role a été modifié !' })
     })
-    .patch(baseUrl + '/api/alerts/' + idAlert2,
-      {
-        firstname: 'Donald',
-        lastname: 'Duck'
-      }
-    )
-    .expect('status', 200)
+
+    // Delete
+    it('Should delete role', function () {
+      return frisby
+        .setup({
+          request: {
+            headers: {
+              Authorization: 'Bearer ' + authToken
+            }
+          }
+        })
+        .delete(baseUrl + '/api/roles/' + roleId)
+        .expect('status', 200)
+        .expect('json', { message: 'Le role a été supprimé !' })
+    })
+  })
 })
