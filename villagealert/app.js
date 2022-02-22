@@ -8,11 +8,12 @@ import swaggerUi from 'swagger-ui-express'
 import swaggerSpecs from './swaggerConfig.js'
 
 // Authentification passport.js
-import './utils/auth.js'
+import './utils/configPassport.js'
 
 // Routes
 import alertRoutes from './routes/alert.route.js'
 import userRoutes from './routes/user.route.js'
+import roleRoutes from './routes/role.route.js'
 
 // Variables d'environnement
 dotenv.config()
@@ -47,6 +48,7 @@ app.use(express.urlencoded({ extended: true }))
 // Use Routes
 app.use('/api/alerts', alertRoutes)
 app.use('/api/users', userRoutes)
+app.use('/api/roles', roleRoutes)
 
 // Listen
 const PORT = process.env.PORT || 3000

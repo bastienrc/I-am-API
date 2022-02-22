@@ -2,11 +2,10 @@ import passport from 'passport'
 import { Strategy } from 'passport-local'
 import UserModel from '../models/user.model.js'
 import dotenv from 'dotenv'
-import JWT from 'passport-jwt'
-
+import { Strategy as JWTstrategy, ExtractJwt } from 'passport-jwt'
 dotenv.config()
-const { Strategy: JWTstrategy, ExtractJwt } = JWT
 
+// Passport Signup
 passport.use(
   'signup',
   new Strategy(
@@ -17,8 +16,14 @@ passport.use(
     },
     async (req, email, password, done) => {
       try {
-        const user = await UserModel.create({ ...req.body })
-        return done(null, user)
+        const isEmailExist = await UserModel.findOne({ email })
+
+        if (isEmailExist) {
+          return done({ status: 400, message: 'Email déja utilisé.' })
+        } else {
+          const user = await UserModel.create({ ...req.body })
+          return done(null, user)
+        }
       } catch (error) {
         return done(error)
       }
@@ -26,6 +31,7 @@ passport.use(
   )
 )
 
+// Passport Login
 passport.use(
   'login',
   new Strategy(
@@ -55,6 +61,7 @@ passport.use(
   )
 )
 
+// Passport JWT
 passport.use(
   new JWTstrategy({
     secretOrKey: process.env.SECRET_KEY,

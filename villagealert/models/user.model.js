@@ -13,58 +13,47 @@ const UserSchema = Schema({
   },
   password: {
     type: String,
+    trim: true,
     required: [true, 'le mot de passe est obligatoire']
+    // match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/, 'Ce mot de passe n\'est pas valide !']
   },
   role: {
     type: String,
-    enum: ['citoyen', 'responsable', 'admin'],
-    default: 'citoyen'
-  },
-  service: {
-    type: String,
-    trim: true,
-    enum: ['voirie', 'stationnement', 'travaux', 'autre', 'none'],
-    default: 'none'
+    default: 'aucun'
   },
   firstname: {
     type: String,
     trim: true,
-    required: [true, 'Le prénom est obligatoire'],
     minLength: [2, 'Le prénom doit avoir un minimum de 2 caractères'],
     maxLength: [42, 'Le prénom doit avoir un maximum de 42 caractères']
   },
   lastname: {
     type: String,
     trim: true,
-    required: [true, 'Le nom est obligatoire'],
     minLength: [2, 'Le nom doit avoir un minimum de 2 caractères'],
     maxLength: [42, 'Le nom doit avoir un maximum de 42 caractères']
   },
   address: {
     type: String,
     trim: true,
-    required: [true, 'L\'adresse est obligatoire'],
     minLength: [2, 'L\'adresse doit avoir un minimum de 2 caractères'],
     maxLength: [42, 'L\'adresse doit avoir un maximum de 42 caractères']
   },
   postCode: {
     type: String,
     trim: true,
-    required: [true, 'Le code postal est obligatoire'],
-    minLength: [5, 'Le code postal doit être de 6 caractères'],
-    maxLength: [5, 'Le code postal doit être de 6 caractères']
+    minLength: [5, 'Le code postal doit être de 5 caractères'],
+    maxLength: [5, 'Le code postal doit être de 5 caractères']
   },
   city: {
     type: String,
     trim: true,
-    required: [true, 'La ville est obligatoire'],
     minLength: [2, 'Le nom de la ville doit avoir un minimum de 2 caractères'],
     maxLength: [42, 'Le nom de la ville doit avoir un maximum de 42 caractères']
   },
   phone: {
     type: String,
     trim: true,
-    required: [true, 'Le téléphone est obligatoire'],
     match: [/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/gm, 'Ce numéro de téléphone n\'est pas valide !']
   },
   avatarUrl: {
@@ -102,12 +91,12 @@ UserSchema.static('emailExists', async function ({ email }) {
   return user ? { email: 'Cet email existe déjà !' } : false
 })
 
-// Mméthode statique ajoutée au schéma.
+// Méthode statique ajoutée au schéma.
 // Nous l'utilisons pour authentifier l'utilisateur.
 // Si l'utilisateur existe et que la comparaison de mot de passe
 // entre plainTextPassword et le mot de passe utilisateur haché est réussie,
 // renvoyez l'objet utilisateur.
-// Sinon, retourne false pour. échec d'authentification.
+// Sinon, retourne false pour échec d'authentification.
 UserSchema.static('authenticate', async function (username, plainTextPassword) {
   const user = await this.findOne({ $or: [{ email: username }, { username }] })
   if (user && await bcrypt.compare(plainTextPassword, user.password)) return user

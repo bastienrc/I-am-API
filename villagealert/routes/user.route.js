@@ -1,19 +1,22 @@
 import express from 'express'
-import passport from 'passport'
+// import passport from 'passport'
 import dotenv from 'dotenv'
-import jwt from 'jsonwebtoken'
-import { catchErrors } from '../utils/helpers.js'
+
 import {
-  signup, getAccount, updateAccount, deleteAccount,
-  updateUser, deleteUser, getOneUser, getAllUser
+  signup,
+  login,
+  authentication,
+  authorization
+} from '../controllers/auth.controller.js'
+
+import {
+  getAccount, updateAccount, deleteAccount,
+  updateUser, deleteUser, getOneUser, getAllUsers
 } from '../controllers/user.controller.js'
+
 dotenv.config()
 
 const router = express.Router()
-
-//
-// Citoyen
-//
 
 /**
  * @openapi
@@ -68,7 +71,7 @@ const router = express.Router()
  *       400:
  *         description: ERROR
  */
-router.post('/signup', passport.authenticate('signup', { session: false }), catchErrors(signup))
+router.post('/signup', authentication, authorization, signup)
 
 /**
  * @openapi
@@ -93,38 +96,14 @@ router.post('/signup', passport.authenticate('signup', { session: false }), catc
  *       400:
  *         description: Bad Request, vous n'auriez pas oublié quelque chose ?
  */
-router.post('/login', (req, res, next) => {
-  passport.authenticate('login', async (err, user) => {
-    try {
-      if (err || !user) {
-        const error = new Error('Une erreur est survenue.')
-        return next(error)
-      }
-
-      req.login(user, { session: false }, async error => {
-        if (error) return next(error)
-
-        const body = { _id: user._id, email: user.email }
-        const token = jwt.sign({ user: body }, process.env.SECRET_KEY)
-        res.json({ token })
-      })
-    } catch (error) {
-      return next(error)
-    }
-  })(req, res, next)
-}
-)
-
-//
-// Citoyen connecté
-//
+router.post('/login', login)
 
 /**
  * @openapi
  * /api/users/account:
  *   get:
  *     description: voir son compte
- *     tags: [Citoyen connecté]
+ *     tags: [Account]
  *     responses:
  *       200:
  *         description: envoie les données du citoyen
@@ -134,14 +113,15 @@ router.post('/login', (req, res, next) => {
  *         description: Unauthorized, vous n'êtes pas connecté
  *
  */
-router.get('/account', passport.authenticate('jwt', { session: false }), catchErrors(getAccount))
+
+router.get('/account', authentication, authorization, getAccount)
 
 /**
  * @openapi
  * /api/users/account:
  *   patch:
  *     description: Mettre à jour son profil
- *     tags: [Citoyen connecté]
+ *     tags: [Account]
  *     parameters:
  *       - name: token
  *         description: token
@@ -159,14 +139,14 @@ router.get('/account', passport.authenticate('jwt', { session: false }), catchEr
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.patch('/account', passport.authenticate('jwt', { session: false }), updateAccount)
+router.patch('/account', authentication, authorization, updateAccount)
 
 /**
  * @openapi
  * /api/users/account:
  *   delete:
  *     description: Effacer son compte
- *     tags: [Citoyen connecté]
+ *     tags: [Account]
  *     parameters:
  *       - name: token
  *         description: token
@@ -186,11 +166,7 @@ router.patch('/account', passport.authenticate('jwt', { session: false }), updat
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.delete('/account', passport.authenticate('jwt', { session: false }), deleteAccount)
-
-//
-// Admin
-//
+router.delete('/account', authentication, authorization, deleteAccount)
 
 /**
  * @openapi
@@ -217,11 +193,11 @@ router.delete('/account', passport.authenticate('jwt', { session: false }), dele
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErrors(updateUser))
+router.patch('/:id', authentication, authorization, updateUser)
 
 /**
  * @openapi
- * /api/users/list:
+ * /api/users:
  *   get:
  *     description: liste tous les utilisateurs
  *     tags: [Admin]
@@ -244,7 +220,7 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), catchErro
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.get('/list', passport.authenticate('jwt', { session: false }), catchErrors(getAllUser))
+router.get('', authentication, authorization, getAllUsers)
 
 /**
  * @openapi
@@ -271,7 +247,7 @@ router.get('/list', passport.authenticate('jwt', { session: false }), catchError
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors(getOneUser))
+router.get('/:id', authentication, authorization, getOneUser)
 
 /**
  * @openapi
@@ -298,6 +274,6 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), catchErrors
  *       401:
  *         description: Unauthorized, vous n'êtes pas connecté
  */
-router.delete('/:id', passport.authenticate('jwt', { session: false }), catchErrors(deleteUser))
+router.delete('/:id', authentication, authorization, deleteUser)
 
 export default router
