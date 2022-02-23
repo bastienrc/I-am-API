@@ -1,6 +1,6 @@
 {
   "name": "villagealert",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "app.js",
   "description": "API d'alerte citoyenne",
   "author": "Sebastien Colbert <colbertsebastien@gmail.com> (https://sebastiencolbert.fr)",
@@ -14,14 +14,12 @@
     "test:coverage": "jest --coverage --reporter=html",
     "test:coverage:view": "open coverage/lcov-report/index.html",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "fixtures": "mongodb-fixtures load -u mongodb://localhost:8000/territorial-api-mongodb --path ./__tests__/fixtures",
     "deploy": "cd .. && git subtree push --prefix villagealert heroku main"
   },
   "devDependencies": {
     "frisby": "^2.1.3",
     "jest": "^27.4.5",
     "jest-html-reporters": "^3.0.5",
-    "node-mongodb-fixtures": "^3.2.9",
     "nodemon": "^2.0.15",
     "standard": "^16.0.4"
   },
