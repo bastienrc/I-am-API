@@ -8,26 +8,26 @@ dotenv.config()
 //
 // Account
 //
-export function userfromToken (req) {
+export function userFromToken (req) {
   const token = req.headers.authorization.split(' ')[1]
   const decodedToken = jwt.verify(token, process.env.SECRET_KEY)
   return decodedToken.user
 }
 
 export const getAccount = async (req, res, next) => {
-  const users = await UserModel.find({ _id: userfromToken(req)._id })
+  const users = await UserModel.find({ _id: userFromToken(req)._id })
   res.send(users[0])
 }
 
 export const updateAccount = (req, res, next) => {
-  const userId = userfromToken(req)._id
+  const userId = userFromToken(req)._id
   UserModel.updateOne({ _id: userId }, { ...req.body, _id: userId })
     .then(() => res.status(200).json({ message: 'Votre compte a été modifié !' }))
     .catch(error => res.status(404).json({ error }))
 }
 
 export const deleteAccount = (req, res, next) => {
-  const userId = userfromToken(req)._id
+  const userId = userFromToken(req)._id
   UserModel.findByIdAndDelete(userId)
     .then(() => res.status(200).json({ message: 'Votre compte a été supprimé !' }))
     .catch(error => res.status(400).json({ error }))

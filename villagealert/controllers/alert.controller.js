@@ -1,8 +1,7 @@
 import Alert from '../models/alert.model.js'
-// import UserModel from '../models/user.model.js'
 import sendMail from '../utils/sendMail.js'
 import dotenv from 'dotenv'
-import { userIdfromToken } from './user.controller.js'
+import { userFromToken } from './user.controller.js'
 
 // Variables d'environnement
 dotenv.config()
@@ -14,7 +13,7 @@ export function readOneAlert (req, res, next) {
 }
 
 export function readOwnAlerts (req, res, next) {
-  const { _id } = userIdfromToken(req)
+  const { _id } = userFromToken(req)
   Alert.find({ userId: _id })
     .then(alerts => res.status(200).json(alerts))
     .catch(error => res.status(400).json({ error }))
@@ -79,7 +78,7 @@ function mailAlert (info) {
 }
 
 export function newAlert (req, res, next) {
-  const userId = userIdfromToken(req)._id
+  const userId = userFromToken(req)._id
   const alert = new Alert({
     userId: userId,
     ...req.body

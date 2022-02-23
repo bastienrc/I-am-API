@@ -8,7 +8,7 @@ const router = express.Router()
  * /api/roles/:
  *   post:
  *     description: Ajout d'un role
- *     tags: [Gestion des roles]
+ *     tags: [Roles]
  *     parameters:
  *       - name: roleName
  *         description: Nom du role
@@ -30,7 +30,7 @@ router.post('', authentication, authorization, addRole)
  * /api/roles/:id:
  *   get:
  *     description: voir un role
- *     tags: [Gestion des roles]
+ *     tags: [Roles]
  *     responses:
  *       200:
  *         description: ...
@@ -47,7 +47,7 @@ router.get('/:id', authentication, authorization, getRole)
  * /api/roles/:
  *   get:
  *     description: voir tous les roles
- *     tags: [Gestion des roles]
+ *     tags: [Roles]
  *     responses:
  *       200:
  *         description: ...
@@ -65,7 +65,7 @@ router.get('', authentication, authorization, getRoles)
  * /api/roles/:id:
  *   patch:
  *     description: Mettre à jour un role
- *     tags: [Gestion des roles]
+ *     tags: [Roles]
  *     parameters:
  *       - name: roleName
  *         description: Nom du role
@@ -89,7 +89,7 @@ router.patch('/:id', authentication, authorization, updateRole)
  * /api/roles/:id:
  *   delete:
  *     description: Effacer un role
- *     tags: [Gestion des roles]
+ *     tags: [Roles]
  *     responses:
  *       200:
  *         description: Un role a été supprimé !
