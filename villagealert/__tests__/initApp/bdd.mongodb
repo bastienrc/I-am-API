@@ -97,22 +97,32 @@ db.roles.insertMany([
   }
 ]);
 
+
+//
+// Users
+//
+
 // On vide la collection
 db.users.drop()
 
 // On insert quelques documents pour tester les différents cas d'utilisation
 db.users.insertMany([
-  { _id: ObjectId("0000485817a09ff7e06a4a8f"), email: 'test000@gmail.com', firstname: 'Albert', lastname: 'Karcher', service: 'none', password: 'Test62200', role: 'admin', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("1000485817a09ff7e06a4a8f"), email: 'test001@gmail.com', firstname: 'Bertrand', lastname: 'Lovelace', service: 'voirie', password: 'Test62200', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("2000485817a09ff7e06a4a8f"), email: 'test002@gmail.com', firstname: 'Cassie', lastname: 'Mekor', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("3000485817a09ff7e06a4a8f"), email: 'test003@gmail.com', firstname: 'Deborah', lastname: 'Neant', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("4000485817a09ff7e06a4a8f"), email: 'test004@gmail.com', firstname: 'Elodie', lastname: 'Olivier', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("5000485817a09ff7e06a4a8f"), email: 'test005@gmail.com', firstname: 'Fanny', lastname: 'Paris', service: 'stationnement', password: 'Test62200', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("6000485817a09ff7e06a4a8f"), email: 'test006@gmail.com', firstname: 'Gerald', lastname: 'Queen', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("7000485817a09ff7e06a4a8f"), email: 'test007@gmail.com', firstname: 'Hector', lastname: 'Renaud', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("8000485817a09ff7e06a4a8f"), email: 'test008@gmail.com', firstname: 'Iréne', lastname: 'Sergent', service: 'travaux', password: 'Test62200', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
-  { _id: ObjectId("9000485817a09ff7e06a4a8f"), email: 'test009@gmail.com', firstname: 'Jacque', lastname: 'Teberus', service: 'none', password: 'Test62200', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' }
+  { _id: ObjectId("0000485817a09ff7e06a4a8f"), email: 'test000@gmail.com', firstname: 'Albert', lastname: 'Karcher', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'admin', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("1000485817a09ff7e06a4a8f"), email: 'test001@gmail.com', firstname: 'Bertrand', lastname: 'Lovelace', service: 'voirie', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("2000485817a09ff7e06a4a8f"), email: 'test002@gmail.com', firstname: 'Cassie', lastname: 'Mekor', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("3000485817a09ff7e06a4a8f"), email: 'test003@gmail.com', firstname: 'Deborah', lastname: 'Neant', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("4000485817a09ff7e06a4a8f"), email: 'test004@gmail.com', firstname: 'Elodie', lastname: 'Olivier', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("5000485817a09ff7e06a4a8f"), email: 'test005@gmail.com', firstname: 'Fanny', lastname: 'Paris', service: 'stationnement', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("6000485817a09ff7e06a4a8f"), email: 'test006@gmail.com', firstname: 'Gerald', lastname: 'Queen', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("7000485817a09ff7e06a4a8f"), email: 'test007@gmail.com', firstname: 'Hector', lastname: 'Renaud', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("8000485817a09ff7e06a4a8f"), email: 'test008@gmail.com', firstname: 'Iréne', lastname: 'Sergent', service: 'travaux', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'responsable', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' },
+  { _id: ObjectId("9000485817a09ff7e06a4a8f"), email: 'test009@gmail.com', firstname: 'Jacque', lastname: 'Teberus', service: 'none', password: '$2b$10$jFvQ.9FG2ZjzepxwUXznF.t1vZ4Klvy0ej/a5i5iI37FbhrpDGyBu', role: 'citoyen', address: '42 rue nullepart ailleurs', postCode: '62200', city: 'Boulogne-sur-mer', phone: '0123456789' }
 ]);
+
+
+//
+// alerts
+//
 
 // On vide la collection
 db.alerts.drop()

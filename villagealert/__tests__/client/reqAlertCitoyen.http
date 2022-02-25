@@ -10,14 +10,10 @@
 
 @baseUrl = http://localhost:8000
 @token = {{login.response.body.token}}
-@userId = ''
-@email = test000@gmail.com
-@password = Test62200
-@alertId = 61d2b7d89349f2d847da06b6
 
 
 ###
-### Citoyen
+### Test Citoyen
 ###
 
 ### Signup
@@ -25,8 +21,8 @@ POST {{baseUrl}}/api/users/signup HTTP/1.1
 content-type: application/json
 
 {
-  "email": "{{email}}",
-  "password": "{{password}}",
+  "email": "citoyen000@gmail.com",
+  "password": "Test62200",
   "firstname": "Pat",
   "lastname": "Hibulaire",
   "address": "42 rue nullepart ailleurs",
@@ -41,12 +37,12 @@ POST {{baseUrl}}/api/users/login HTTP/1.1
 content-type: application/json
 
 {
-  "email": "{{email}}",
-  "password": "{{password}}"
+  "email": "citoyen000@gmail.com",
+  "password": "Test62200"
 }
 
 ###
-### Citoyen Connecté
+### Account
 ###
 
 ### Affiche le profil du Citoyen
@@ -107,6 +103,9 @@ GET {{baseUrl}}/api/alerts
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
+
+@alertId = 000
+
 ### Read: Affiche l'alerte :alertId
 GET {{baseUrl}}/api/alerts/{{alertId}}
 Content-Type: application/json
@@ -120,6 +119,8 @@ Authorization: Bearer {{token}}
 ###
 ### Responsable
 ###
+
+@userId = 000
 
 ### Patch: Mise à jour du status de l'alerte
 PATCH {{baseUrl}}/api/alerts/{{{userId}}}

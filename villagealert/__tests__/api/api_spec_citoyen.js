@@ -13,10 +13,10 @@ describe('Test Citoyen', () => {
   // Connexion
   //
   describe('Connexion', () => {
-    // Test de création de compte
-    it('Should be signup', function () {
+    // Création du compte
+    it('It should be signup', function () {
       return frisby.post(baseUrl + '/api/users/signup', {
-        email: 'TestAuto001@gmail.com',
+        email: 'citoyen001@gmail.com',
         password: 'Test62200',
         firstname: 'Pat',
         lastname: 'Hibulaire',
@@ -25,14 +25,30 @@ describe('Test Citoyen', () => {
         city: 'Calais',
         postCode: '62200'
       })
-        .expect('status', 200)
-        .expect('message', 'Merci de votre inscription')
+        .expect('status', 201)
+        .expect('json', { message: 'Merci de votre inscription' })
     })
 
+    it('It should not be signup because email already exist', function () {
+      return frisby.post(baseUrl + '/api/users/signup', {
+        email: 'citoyen001@gmail.com',
+        password: 'Test62200',
+        firstname: 'Pat',
+        lastname: 'Hibulaire',
+        address: '42 rue nullepart ailleurs',
+        phone: '0123456789',
+        city: 'Calais',
+        postCode: '62200'
+      })
+        .expect('status', 400)
+        .expect('json', { message: 'Email déja utilisé.' })
+    })
+
+    // Connexion au compte
     it('It should be login', function () {
       return frisby.post(baseUrl + '/api/users/login', {
-        email: 'admin@gmail.com',
-        password: 'Admin000'
+        email: 'citoyen000@gmail.com',
+        password: 'Test62200'
       })
         .expect('status', 200)
         .expect('jsonTypes', {
@@ -46,7 +62,7 @@ describe('Test Citoyen', () => {
 
     it('It should have an error if password is wrong', function () {
       return frisby.post(baseUrl + '/api/users/login', {
-        email: 'admin@gmail.com',
+        email: 'citoyen000@gmail.com',
         password: 'Mauvais mot de passe'
       })
         .expect('status', 400)
