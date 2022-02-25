@@ -11,7 +11,7 @@ export async function signup (req, res, next) {
   passport.authenticate('signup', { session: false }, async (fail, error, success) => {
     // if (error) return next(error)
     if (fail) return res.status(fail.status).json({ message: fail.message })
-    res.status(201).json({ message: 'Signup OK' })
+    res.status(201).json({ message: 'Merci de votre inscription' })
   })(req, res, next)
 }
 

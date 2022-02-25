@@ -16,7 +16,7 @@ describe('Test Citoyen', () => {
     // Test de création de compte
     it('Should be signup', function () {
       return frisby.post(baseUrl + '/api/users/signup', {
-        email: 'user01@gmail.com',
+        email: 'TestAuto001@gmail.com',
         password: 'Test62200',
         firstname: 'Pat',
         lastname: 'Hibulaire',
@@ -26,6 +26,7 @@ describe('Test Citoyen', () => {
         postCode: '62200'
       })
         .expect('status', 200)
+        .expect('message', 'Merci de votre inscription')
     })
 
     it('It should be login', function () {

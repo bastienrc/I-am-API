@@ -1,5 +1,4 @@
 import express from 'express'
-// import passport from 'passport'
 import dotenv from 'dotenv'
 
 import {
@@ -23,7 +22,7 @@ const router = express.Router()
  * /api/users/signup:
  *   post:
  *     description: Création d'un compte
- *     tags: [Citoyen]
+ *     tags: [Users]
  *     parameters:
  *       - name: email
  *         description: email
@@ -67,18 +66,18 @@ const router = express.Router()
  *         required: true
  *     responses:
  *       200:
- *         description: Signup OK
+ *         description: Merci de votre inscription
  *       400:
  *         description: ERROR
  */
-router.post('/signup', authentication, authorization, signup)
+router.post('/signup', signup)
 
 /**
  * @openapi
  * /api/users/login:
  *   post:
  *     description: Connexion a son compte
- *     tags: [Citoyen]
+ *     tags: [Users]
  *     parameters:
  *       - name: email
  *         description: email
@@ -106,7 +105,7 @@ router.post('/login', login)
  *     tags: [Account]
  *     responses:
  *       200:
- *         description: envoie les données du citoyen
+ *         description: envoie les données du Users
  *       400:
  *         description: error
  *       401:
