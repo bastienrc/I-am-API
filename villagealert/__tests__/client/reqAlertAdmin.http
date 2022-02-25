@@ -10,30 +10,11 @@
 
 @baseUrl = http://localhost:8000
 @token = {{login.response.body.token}}
-@userId = ''
-@email = test342@gmail.fr
-@password = Test62200
-@alertId = 61d2b7d89349f2d847da06b6
 
 
 ###
-### Citoyen
+### Test Admin
 ###
-
-### Signup
-POST {{baseUrl}}/api/users/signup HTTP/1.1
-content-type: application/json
-
-{
-  "email": "{{email}}",
-  "password": "{{password}}",
-  "firstname": "Pat",
-  "lastname": "Hibulaire",
-  "address": "42 rue nullepart ailleurs",
-  "phone": "0123456789",
-  "city": "Calais",
-  "postCode": "62200"
-}
 
 ### Login
 # @name login
@@ -41,8 +22,8 @@ POST {{baseUrl}}/api/users/login HTTP/1.1
 content-type: application/json
 
 {
-  "email": "{{email}}",
-  "password": "{{password}}"
+  "email": "test000@gmail.com",
+  "password": "Admin000"
 }
 
 ###
