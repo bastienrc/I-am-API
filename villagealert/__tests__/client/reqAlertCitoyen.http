@@ -21,7 +21,7 @@ POST {{baseUrl}}/api/users/signup HTTP/1.1
 content-type: application/json
 
 {
-  "email": "citoyen000@gmail.com",
+  "email": "citoyen200@gmail.com",
   "password": "Test62200",
   "firstname": "Pat",
   "lastname": "Hibulaire",
@@ -37,7 +37,7 @@ POST {{baseUrl}}/api/users/login HTTP/1.1
 content-type: application/json
 
 {
-  "email": "citoyen000@gmail.com",
+  "email": "citoyen200@gmail.com",
   "password": "Test62200"
 }
 

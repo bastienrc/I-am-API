@@ -15,8 +15,11 @@ export function userFromToken (req) {
 }
 
 export const getAccount = async (req, res, next) => {
+  console.log('testeureturisetui')
   const users = await UserModel.find({ _id: userFromToken(req)._id })
-  res.send(users[0])
+  users
+    .then(res.send(users[0]))
+    .catch(error => res.status(400).json({ error }))
 }
 
 export const updateAccount = (req, res, next) => {
